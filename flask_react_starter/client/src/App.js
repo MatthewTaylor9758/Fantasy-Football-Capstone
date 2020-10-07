@@ -8,7 +8,7 @@ import UserList from './components/UsersList';
 
 function App() {
     // const [loading, setLoading] = useState(true)
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
     // useEffect(() => {
     //     const loadUser = async () => {
     //         const res = await fetch("/api/users/current_user");

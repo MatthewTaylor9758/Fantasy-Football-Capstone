@@ -40,10 +40,13 @@ export const login = (username, password) => async dispatch => {
     body: JSON.stringify({username, password})
   });
   const data = await res.json();
-  if (res.ok) {
+  console.log(data);
+  if (res.ok && data.user) {
     console.log(data.user);
     localStorage.setItem('user', JSON.stringify(data.user))
     dispatch(setUser(data.user))
+  } else {
+    return data.errors;
   }
   return res;
 }

@@ -22,6 +22,10 @@ def login():
   if not data:
     return {'errors': ''}
   user = User.query.filter(User.username == data['username']).first()
-  user_dict = user.to_dict()
-  # login_user(user)
-  return {'user': user_dict}
+  if user and user.check_password(data['password']):
+    user_dict = user.to_dict()
+    # login_user(user)
+    return {'user': user_dict}
+  else:
+    error = {"1":"Incorrect password or username"}
+    return {"errors":error}
