@@ -2,6 +2,7 @@ import React, { useEffect, useState }from 'react';
 import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import LoginPage from './pages/LoginPage';
+import SignupPage from './pages/SignupPage';
 import { setUser } from './store/auth'
 import UserList from './components/UsersList';
 
@@ -34,11 +35,13 @@ function App() {
                     <li><NavLink to="/" activeclass="active">Home</NavLink></li>
                     <li><NavLink to="/users" activeclass="active">Users</NavLink></li>
                     <li><NavLink to='/login'>Login</NavLink></li>
+                    <li><NavLink to='/signup'>Sign up</NavLink></li>
                 </ul>
             </nav>
             <Switch>
                 <Route exact path="/users" component={UserList}></Route>
                 <Route exact path='/login' component={LoginPage}></Route>
+                <Route exact path='/signup' component={SignupPage}></Route>
                 <Route path="/">
                     <h1>My Home Page</h1>
                 </Route>

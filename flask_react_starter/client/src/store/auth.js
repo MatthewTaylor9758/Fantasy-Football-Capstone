@@ -51,6 +51,21 @@ export const login = (username, password) => async dispatch => {
   return res;
 }
 
+export const signup = (username, email, password) => async dispatch => {
+  const csrfToken = Cookies.get('XSRF-TOKEN')
+  console.log(username, email, password)
+  const res = await fetch('/api/users/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRF-TOKEN': csrfToken
+    },
+    body: JSON.stringify({username, email, password})
+  });
+  const data = await res.json();
+  console.log(data);
+}
+
 let user = JSON.parse(localStorage.getItem('user'));
 let auth = user;
 const initialState = user ? auth : {};

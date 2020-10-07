@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, url_for, request, redirect, render_template
 # from flask_login import LoginManager, current_user, login_user, logout_user, login_required
-from app.models import User
+from app.models import User, db
 
 user_routes = Blueprint('users', __name__)
 
@@ -29,3 +29,25 @@ def login():
   else:
     error = {"1":"Incorrect password or username"}
     return {"errors":error}
+
+@user_routes.route('/', methods=['POST'])
+def signup():
+  data = request.json
+  errors = {}
+  username_exists = User.query.filter(User.username == data['username']).first()
+  email_exists = User.query.filter(User.email == data['email']).first()
+  if username_exists:
+    errors['1'] = 'That username is unavailable.'
+  if email_exists:
+    errors['2'] = 'That email is unavailable.'
+  if errors:
+    return {'errors': errors}
+  new_user = User(
+    username = data['username'],
+    email = data['email'],
+    password = data['password']
+  )
+  db.session.add(new_user)
+  db.session.commit()
+  user_dict = new_user.to_dict()
+  return {'user': user_dict}
