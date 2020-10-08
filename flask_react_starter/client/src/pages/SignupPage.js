@@ -10,6 +10,7 @@ function SignupPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [errors, setErrors] = useState([]);
 
   const handleUsername = (e) => {
     setUsername(e.target.value);
@@ -27,13 +28,28 @@ function SignupPage() {
     setConfirmPassword(e.target.value);
   };
 
+  useEffect(() => {
+    console.log(Object.values(errors))
+  }, [errors])
+
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const res = await dispatch(signup(username, email, password))
+    if (!username || !email || !password || !confirmPassword) {
+      await setErrors(['Please fill out all fields.'])
+      console.log(errors)
+    } else {
+      const res = await dispatch(signup(username, email, password))
+      console.log(res);
+      setErrors(Object.values(res))
+      console.log(errors);
+    }
   }
 
   return (
     <>
+      {errors ? <ul>
+                  {errors.map((error, index) => <li key={index}>{error}</li>)}
+                </ul> : null}
       <form action='/api/users/' method='post' onSubmit={handleSubmit}>
         <TextField type='text' placeholder='Username' value={username} onChange={handleUsername}/>
         <TextField type='email' placeholder='Email' value={email} onChange={handleEmail}/>

@@ -64,6 +64,12 @@ export const signup = (username, email, password) => async dispatch => {
   });
   const data = await res.json();
   console.log(data);
+  if (res.ok && data.user) {
+    localStorage.setItem('user', JSON.stringify(data.user));
+    dispatch(setUser(data.user))
+  } else {
+    return data.errors;
+  }
 }
 
 let user = JSON.parse(localStorage.getItem('user'));
