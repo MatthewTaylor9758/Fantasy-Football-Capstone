@@ -1,7 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
-
+from sqlalchemy import UniqueConstraint, ForeignKeyConstraint
 db = SQLAlchemy()
 
 class User(db.Model):
@@ -46,6 +46,10 @@ class League(db.Model):
 
 class Team(db.Model):
   __tablename__ = 'teams'
+  __table_args__ = (
+    # This is needed for the foreign key in the FFSplayer table
+    UniqueConstraint('id', 'league_id', name = 'team_league_uidx'),
+  )
 
   id = db.Column(db.Integer, nullable = False,  primary_key = True)
   name = db.Column(db.String(100), nullable = False)
@@ -70,7 +74,11 @@ class Player(db.Model):
 
 class FFSplayer(db.Model):
   __tablename__ = 'ffsplayers'
-
+  __table_args__ = (
+    ForeignKeyConstraint(['team_id', 'league_id'], ['teams.id', 'teams.league_id'], name='team_league_fk'),
+    UniqueConstraint('player_id', 'league_id', name='player_in_league_only_once_uidx')
+  )
   id = db.Column(db.Integer, nullable = False,  primary_key = True)
-  player_id = db.Column(db.Integer, db.ForeignKey('players.id'))
-  team_id = db.Column(db.Integer, db.ForeignKey('teams.id'))
+  player_id = db.Column(db.Integer, db.ForeignKey('players.id'), nullable = False)
+  team_id = db.Column(db.Integer, db.ForeignKey('teams.id'), nullable = False)
+  league_id = db.Column(db.Integer, nullable = False)

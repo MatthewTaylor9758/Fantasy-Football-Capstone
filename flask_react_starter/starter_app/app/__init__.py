@@ -16,6 +16,7 @@ app.register_blueprint(user_routes, url_prefix='/api/users')
 db.init_app(app)
 Migrate(app, db)
 
+# from migrate.changeset.constraint import ForeignKeyConstraint
 ## Application Security
 CORS(app)
 @app.after_request
