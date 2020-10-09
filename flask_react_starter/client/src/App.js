@@ -3,6 +3,9 @@ import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
+import MyTeamPage from './pages/MyTeamPage';
+import AvailPlayers from './pages/AvailPlayers';
+import SplashPage from './pages/SplashPage';
 import { setUser } from './store/auth'
 import UserList from './components/UsersList';
 
@@ -30,21 +33,13 @@ function App() {
     //   }
     return (
         <BrowserRouter>
-            <nav>
-                <ul>
-                    <li><NavLink to="/" activeclass="active">Home</NavLink></li>
-                    <li><NavLink to="/users" activeclass="active">Users</NavLink></li>
-                    <li><NavLink to='/login'>Login</NavLink></li>
-                    <li><NavLink to='/signup'>Sign up</NavLink></li>
-                </ul>
-            </nav>
             <Switch>
                 <Route exact path="/users" component={UserList}></Route>
                 <Route exact path='/login' component={LoginPage}></Route>
                 <Route exact path='/signup' component={SignupPage}></Route>
-                <Route path="/">
-                    <h1>My Home Page</h1>
-                </Route>
+                <Route exact path='/myTeam/:id' component={MyTeamPage}></Route>
+                <Route exact path='/players' component={AvailPlayers}></Route>
+                <Route path="/" component={SplashPage}></Route>
             </Switch>
         </BrowserRouter>
     );
