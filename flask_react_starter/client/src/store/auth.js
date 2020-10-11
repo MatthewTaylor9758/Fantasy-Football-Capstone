@@ -48,7 +48,7 @@ export const login = (username, password) => async dispatch => {
   } else {
     return data.errors;
   }
-  return res;
+  return data;
 }
 
 export const signup = (username, email, password) => async dispatch => {

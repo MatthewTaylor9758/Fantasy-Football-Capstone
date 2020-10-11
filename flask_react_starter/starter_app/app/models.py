@@ -42,6 +42,13 @@ class League(db.Model):
   name = db.Column(db.String(100), nullable = False)
   commish_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
+  def to_dict(self):
+    return {
+      'id': self.id,
+      'name': self.name,
+      'commish_id': self.commish_id
+    }
+
   # Set up many-to-one -> many-teams
 
 class Team(db.Model):
@@ -55,6 +62,14 @@ class Team(db.Model):
   name = db.Column(db.String(100), nullable = False)
   owner_id = db.Column(db.Integer, db.ForeignKey('users.id'))
   league_id = db.Column(db.Integer, db.ForeignKey('leagues.id'))
+
+  def to_dict(self):
+    return {
+      'id': self.id,
+      'name': self.name,
+      'owner_id': self.owner_id,
+      'league_id': self.league_id
+    }
 
   # Set up many-to-one -> many-FFSplayers
 
@@ -72,6 +87,20 @@ class Player(db.Model):
   dob = db.Column(db.Date, nullable = False)
   college = db.Column(db.String(100), nullable = False)
 
+  def to_dict(self):
+    return {
+      'id': self.id,
+      'full_name': self.full_name,
+      'first_name': self.first_name,
+      'last_name': self.last_name,
+      'nfl_team': self.nfl_team,
+      'position': self.position,
+      'height': self.height,
+      'weight': self.weight,
+      'dob': self.dob,
+      'college': self.college
+    }
+
 class FFSplayer(db.Model):
   __tablename__ = 'ffsplayers'
   __table_args__ = (
@@ -82,3 +111,11 @@ class FFSplayer(db.Model):
   player_id = db.Column(db.Integer, db.ForeignKey('players.id'), nullable = False)
   team_id = db.Column(db.Integer, db.ForeignKey('teams.id'), nullable = False)
   league_id = db.Column(db.Integer, nullable = False)
+
+  def to_dict(self):
+    return {
+      'id': self.id,
+      'player_id': self.player_id,
+      'team_id': self.team_id,
+      'league_id': self.league_id
+    }

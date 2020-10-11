@@ -10,6 +10,7 @@ function LoginPage() {
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState([])
   // let errors = ['testError'];
+  // const [userInfo, setUserInfo] = useState(useSelector(state => state.auth));
 
   const handleUsername = (e) => {
     setUsername(e.target.value);
@@ -25,9 +26,22 @@ function LoginPage() {
       setErrors('Please enter a username and password')
     } else {
       const res = await dispatch(login(username, password))
-      setErrors(Object.values(res));
+      // console.log(await res.json());
+      // ***TO DO***: Set up a second (or more) conditional dispatch(s) for grabbing a team, league, and ffsplayers for that team/league USE 'res' TO DO IT!!!
+      console.log(res);
+      debugger
+      if (res['1']) {
+        console.log(res['1'])
+        setErrors(Object.values(res['1']));
+      }
     }
+    // setUserInfo()
+    // handleInfoGathering()
   }
+
+  // const handleInfoGathering = async (e) => {
+  //   console.log(userInfo);
+  // }
 
   return (
     <>
