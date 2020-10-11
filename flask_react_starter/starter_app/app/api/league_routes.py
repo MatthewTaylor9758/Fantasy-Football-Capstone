@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, url_for, request, redirect, render_template
-from app.models import League, db
+from app.models import League, Team, db
 
 league_routes = Blueprint('leagues', __name__)
 
@@ -8,6 +8,7 @@ def get_league():
   data = request.json
   league = League.query.filter(League.id == data['league_id']).first()
   league_dict = league.to_dict()
+  return {'league': league_dict}
 
 @league_routes.route('/', ['POST'])
 def create_league():
@@ -25,3 +26,11 @@ def create_league():
   db.session.commit()
   league_dict = league.to_dict()
   return {'league': league_dict}
+
+@league_routes.route('/:teamId', ['PUT'])
+def add_team_to_league():
+  data = request.json
+  number_of_teams = Team.query.filter(Team.league_id == data['requested_league'])
+  if number_of_teams < 12:
+    data['league_id'] = data['requested_league']
+  return data
