@@ -8,7 +8,7 @@ def get_all_players():
   response = Player.query.all()
   return {'players': [player.to_dict() for player in response]}
 
-@player_routes.route('/:playerId', methods=['PUT'])
+@player_routes.route('/<playerId>', methods=['PUT'])
 def get_single_player():
   data = request.json
   player = Player.query.filter(Player.id == data['player_id'])
