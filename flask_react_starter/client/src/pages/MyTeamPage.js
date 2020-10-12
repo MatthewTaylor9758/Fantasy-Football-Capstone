@@ -6,9 +6,14 @@ import { makeStyles, Container, TextField, Button, Typography } from '@material-
 function MyTeamPage() {
   const dispatch = useDispatch();
 
+  const handleGetPlayers = (e) => {
+
+  }
+
   return (
     <>
       <Typography variant='h1'>This is the My Team Page</Typography>
+      <Button onClick={handleGetPlayers}>Show My Teams</Button>
     </>
   )
 }

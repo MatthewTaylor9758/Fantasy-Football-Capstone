@@ -27,6 +27,19 @@ def create_ffsplayer():
   ffsplayer_dict = ffsplayer.to_dict()
   return {'ffsplayer': ffsplayer_dict}
 
+@ffsplayers_routes.route('/<leagueId>/<teamId>')
+def get_team_ffsplayers(leagueId, teamId):
+  league_ffsplayers = FFSplayer.query.filter(FFSplayer.league_id == leagueId)
+
+  def find_team(player):
+    if player['team_id'] == teamId:
+      return True
+    else:
+      return False
+
+  team_ffsplayers = league_ffsplayers.filter(find_team, league_ffsplayers)
+  return [player.to_dict() for player in team_ffsplayers]
+
 @ffsplayers_routes.route('/<ffsplayerId>', methods=['DELETE'])
 def remove_ffsplayer(ffsplayerId):
   ffsplayer = FFSplayer.query.get(ffsplayerId)

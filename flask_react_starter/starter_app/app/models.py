@@ -82,10 +82,10 @@ class Player(db.Model):
   last_name = db.Column(db.String(50), nullable = False)
   nfl_team = db.Column(db.String(100), nullable = False)
   position = db.Column(db.String(5), nullable = False)
-  height = db.Column(db.String(10), nullable = False)
-  weight = db.Column(db.String(10), nullable = False)
-  dob = db.Column(db.Date, nullable = False)
-  college = db.Column(db.String(100), nullable = False)
+  height = db.Column(db.String(10))
+  weight = db.Column(db.String(10))
+  dob = db.Column(db.Date)
+  college = db.Column(db.String(100))
 
   def to_dict(self):
     return {
