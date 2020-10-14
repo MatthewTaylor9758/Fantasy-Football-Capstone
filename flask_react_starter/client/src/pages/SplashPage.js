@@ -7,7 +7,7 @@ import NavBar from '../components/NavBar';
 function SplashPage() {
   const useStyles = makeStyles({
     outerContainer: {
-      backgroundImage: 'linear-gradient(to bottom right, rgba(255, 255, 255, .2), rgba(25, 111, 12, .7), rgba(25, 111, 12, 1))',
+      backgroundImage: 'linear-gradient(to top, rgba(255, 255, 255, .2), rgba(25, 111, 12, .7))',
       height: '100vh',
       width: '100vw',
     }

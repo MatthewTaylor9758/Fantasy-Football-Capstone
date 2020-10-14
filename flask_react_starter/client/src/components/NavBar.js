@@ -5,7 +5,7 @@ import { makeStyles, Container, TextField, Button, Typography, AppBar, Toolbar }
 function NavBar() {
   const useStyles = makeStyles({
     navBar: {
-      backgroundImage: 'radial-gradient(rgb(110, 12, 25), rgb(110, 12, 25), black)',
+      backgroundImage: 'radial-gradient(rgba(110, 12, 25, .9), rgb(110, 12, 25, .9), rgba(0, 0, 0, .7))',
       width: '100vw',
       padding: '0'
     }

@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { login } from '../store/auth'
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { makeStyles, Container, TextField, Button } from '@material-ui/core';
+import { makeStyles, Container, TextField, Button, Card, Typography } from '@material-ui/core';
+import NavBar from '../components/NavBar';
+import '../styles/loginPage.css';
 
 function LoginPage() {
   const dispatch = useDispatch();
@@ -43,14 +45,107 @@ function LoginPage() {
   //   console.log(userInfo);
   // }
 
+  const useStyles = makeStyles((theme) => ({
+    loginForm: () => {
+      return {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: 'fit-content',
+        width: '100%',
+        padding: '2em 0',
+        backgroundColor: 'rgba(255, 255, 255, .15)',
+        backdropFilter: '5px',
+        borderRadius: '10px'
+      }
+    },
+    outerContainer: {
+      width: '100vw',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      height: '100vh',
+    },
+    links: {
+      textDecoration: 'none',
+      fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+      padding: '.7em',
+      zIndex: '10',
+      '&:hover': {
+        color: 'white'
+      }
+    },
+    header: {
+      fontFamily: 'Rockwell'
+    },
+    errorItem: {
+      listStyleType: 'none',
+      color: 'rgb(200, 0, 0)',
+      fontWeight: '400',
+      padding: '.3em'
+    },
+    spacing: {
+      padding: '.3em 0'
+    },
+    loginButton: {
+      padding: '.3em',
+      marginTop: '.3em',
+      '&:hover': {
+        backgroundColor: 'blue',
+        color: 'white'
+      }
+    },
+    signupButton: {
+      backgroundColor: 'rgba(255, 255, 255, .15)',
+      marginTop: '1em',
+      borderRadius: '10px',
+      padding: '0',
+      '&:hover': {
+        backgroundColor: 'rgba(110, 12, 25, 1)',
+      }
+    }
+  }));
+
+  const classes = useStyles();
+
   return (
     <>
-      {errors ? <div>{errors}</div> : null}
-      <form method='put' action='/api/users/' onSubmit={handleSubmit}>
-        <TextField type='text' placeholder='Username' value={username} onChange={handleUsername}/>
-        <TextField type='password' placeholder='Password' value={password} onChange={handlePassword}/>
-        <Button type='submit'>Log in</Button>
-      </form>
+      <div class='area'>
+        <Card id='login-form' className={classes.outerContainer}>
+          <ul class="footballs">
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+          </ul>
+          <div>
+            <form method='put' action='/api/users/' onSubmit={handleSubmit} className={classes.loginForm}>
+              <Typography variant='h4' className={classes.header}>FFStockpile</Typography>
+              {errors ? <div className={classes.errorItem}>{errors}</div> : null}
+              <TextField
+                id='standard-basic'
+                className={classes.spacing}
+                type='text'
+                label='Username'
+                value={username}
+                onChange={handleUsername}/>
+              <TextField
+                id='standard-basic'
+                className={classes.spacing}
+                type='password'
+                label='Password'
+                value={password}
+                onChange={handlePassword}/>
+              <Button className={classes.loginButton} type='submit'>Log in</Button>
+            </form>
+            <Button className={classes.signupButton}>
+              <NavLink to='/signup' className={classes.links}>Don't have an account? Sign up</NavLink>
+            </Button>
+          </div>
+        </Card>
+      </div>
     </>
   )
 }
