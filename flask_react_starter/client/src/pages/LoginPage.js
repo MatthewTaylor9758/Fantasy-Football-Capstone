@@ -24,7 +24,7 @@ function LoginPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!username && !password) {
+    if (!username || !password) {
       setErrors('Please enter a username and password')
     } else {
       const res = await dispatch(login(username, password))
@@ -35,6 +35,8 @@ function LoginPage() {
       if (res['1']) {
         console.log(res['1'])
         setErrors(Object.values(res['1']));
+      } else {
+        window.location.href = `./myTeam/${res.user.id}`
       }
     }
     // setUserInfo()

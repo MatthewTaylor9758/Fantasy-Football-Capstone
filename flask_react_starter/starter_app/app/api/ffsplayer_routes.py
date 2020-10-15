@@ -18,9 +18,9 @@ def create_ffsplayer():
   if ffsplayer_exists:
     return {'error': 'That player is already on a team in your league!'}
   new_ffsplayer = FFSplayer(
-    'player_id': data['player_id'],
-    'team_id': data['team_id'],
-    'league_id': data['league_id']
+    player_id = data['player_id'],
+    team_id = data['team_id'],
+    league_id = data['league_id']
   )
   db.session.add(new_ffsplayer)
   db.session.commit()

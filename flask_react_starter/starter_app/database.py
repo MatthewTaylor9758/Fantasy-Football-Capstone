@@ -21,19 +21,22 @@ with app.app_context():
   ian_team = Team(name = 'Ian\'s Team', owner_id = 1, league_id = 1)
   javier_team = Team(name = "Javier's Team", owner_id = 2, league_id = 2)
   angela_team = Team(name = "Angela's Team", owner_id = 4, league_id = 1)
-        # {
-        #     "playerId": "13",
-        #     "jersey": "12",
-        #     "last_name": "Brady",
-        #     "first_name": "Tom",
-        #     "full_name": "Tom Brady",
-        #     "nfl_team": "TB",
-        #     "position": "QB",
-        #     "height": "6-4",
-        #     "weight": "225",
-        #     "dob": "1977-08-03",
-        #     "college": "Michigan"
-        # }
+
+  player_13 = Player(
+            playerId = 13,
+            jersey = "12",
+            last_name = "Brady",
+            first_name = "Tom",
+            full_name = "Tom Brady",
+            nfl_team = "TB",
+            position = "QB",
+            height = "6-4",
+            weight = "225",
+            dob = "1977-08-03",
+            college = "Michigan"
+  )
+
+  ffsplayer_1 = FFSplayer(player_id = 13, team_id = 1, league_id = 1)
         # {
         #     "playerId": "14",
         #     "jersey": "9",

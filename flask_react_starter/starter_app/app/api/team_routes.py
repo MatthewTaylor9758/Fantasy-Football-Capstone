@@ -3,19 +3,21 @@ from app.models import Team, League, db
 
 team_routes = Blueprint('teams', __name__)
 
+@team_routes.route('/<ownerId>', methods=['GET', 'PUT'])
+def get_single_team(ownerId):
+  data = request.json
+  team = Team.query.filter(Team.owner_id == ownerId).first()
+  team_dict = team.to_dict()
+  return {'team': team_dict}
+
 @team_routes.route('/')
 def get_teams():
   response == Team.query.all()
   return { 'teams': [user.to_dict() for user in response]}
+# This route will be triggered by a login, or a return to the my-team page
 
-@team_routes.route('/<teamId>', method=['PUT']) # This route will be triggered by a login, or a return to the my-team page
-def get_single_team():
-  data = request.json
-  team = Team.query.filter(Team.owner_id == data['id']).first()
-  team_dict = team.to_dict()
-  return {'team': team_dict}
 
-@team_routes.route('/', method=['DELETE'])
+@team_routes.route('/', methods=['DELETE'])
 def remove_team_from_league():
   data = request.json
   # leagues = Team.query.filter(Team.league_id == data['league_id']).all()

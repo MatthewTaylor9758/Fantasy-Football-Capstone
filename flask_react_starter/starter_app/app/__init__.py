@@ -7,12 +7,19 @@ from flask_migrate import Migrate
 
 from .models import db, User
 from .api.user_routes import user_routes
-
+from .api.ffsplayer_routes import ffsplayers_routes
+from .api.league_routes import league_routes
+from .api.player_routes import player_routes
+from .api.team_routes import team_routes
 from .config import Config
 
 app = Flask(__name__)
 app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')
+app.register_blueprint(ffsplayers_routes, url_prefix='/api/ffsplayers')
+app.register_blueprint(league_routes, url_prefix='/api/leagues')
+app.register_blueprint(player_routes, url_prefix='/api/players')
+app.register_blueprint(team_routes, url_prefix='/api/teams')
 db.init_app(app)
 Migrate(app, db)
 

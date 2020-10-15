@@ -1,9 +1,15 @@
 import { createStore, compose, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import auth from './auth';
+import leagues from './leagues';
+import ffsplayers from './ffsplayers';
+import teams from './teams';
 
 const rootReducer = combineReducers({
-  auth
+  auth,
+  leagues,
+  ffsplayers,
+  teams
 })
 
 let storeEnhancer;

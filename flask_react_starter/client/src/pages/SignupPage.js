@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { signup } from '../store/auth';
+import { signup, login } from '../store/auth';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { makeStyles, Container, TextField, Button, Card, Typography } from '@material-ui/core';
 import NavBar from '../components/NavBar';
 import { red } from '@material-ui/core/colors';
 import '../styles/signupPage.css';
+
 function SignupPage() {
   const dispatch = useDispatch();
   const [username, setUsername] = useState('');
@@ -43,11 +44,15 @@ function SignupPage() {
     } else {
       if (password === confirmPassword) {
         const res = await dispatch(signup(username, email, password))
-        if (res) {
+        console.log(res)
+        if (res.errors) {
           console.log(res);
           debugger
-          setErrors(Object.values(res))
+          setErrors(Object.values(res.errors))
           console.log(errors);
+        } else {
+          await dispatch(login(username, password));
+          window.location.href = `./myTeam/${res.user.id}`;
         }
       }
     }

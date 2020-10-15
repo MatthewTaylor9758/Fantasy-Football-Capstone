@@ -84,7 +84,7 @@ class Player(db.Model):
   position = db.Column(db.String(5), nullable = False)
   height = db.Column(db.String(10))
   weight = db.Column(db.String(10))
-  dob = db.Column(db.Date)
+  dob = db.Column(db.String(50))
   college = db.Column(db.String(100))
 
   def to_dict(self):

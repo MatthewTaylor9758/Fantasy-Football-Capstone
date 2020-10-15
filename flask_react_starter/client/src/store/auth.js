@@ -67,6 +67,7 @@ export const signup = (username, email, password) => async dispatch => {
   if (res.ok && data.user) {
     localStorage.setItem('user', JSON.stringify(data.user));
     dispatch(setUser(data.user))
+    return data
   } else {
     return data.errors;
   }
