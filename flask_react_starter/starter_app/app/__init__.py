@@ -5,7 +5,7 @@ from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_migrate import Migrate
 # from flask_login import LoginManager, current_user
 
-from .models import db, User
+from .models import db, User, Player, FFSplayer, Team, League
 from .api.user_routes import user_routes
 from .api.ffsplayer_routes import ffsplayers_routes
 from .api.league_routes import league_routes

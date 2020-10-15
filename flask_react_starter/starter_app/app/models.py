@@ -76,7 +76,8 @@ class Team(db.Model):
 class Player(db.Model):
   __tablename__ = 'players'
 
-  id = db.Column(db.Integer, nullable = False,  primary_key = True)
+  # id = db.Column(db.Integer, nullable = False, autoincrement = True)
+  player_id = db.Column(db.Integer, nullable= False, primary_key = True, autoincrement = False)
   full_name = db.Column(db.String(100), nullable = False, unique = True)
   first_name = db.Column(db.String(50), nullable = False)
   last_name = db.Column(db.String(50), nullable = False)
@@ -89,7 +90,7 @@ class Player(db.Model):
 
   def to_dict(self):
     return {
-      'id': self.id,
+      # 'id': self.id,
       'full_name': self.full_name,
       'first_name': self.first_name,
       'last_name': self.last_name,
@@ -108,7 +109,7 @@ class FFSplayer(db.Model):
     UniqueConstraint('player_id', 'league_id', name='player_in_league_only_once_uidx')
   )
   id = db.Column(db.Integer, nullable = False,  primary_key = True)
-  player_id = db.Column(db.Integer, db.ForeignKey('players.id'), nullable = False)
+  player_id = db.Column(db.Integer, db.ForeignKey('players.player_id'), nullable = False)
   team_id = db.Column(db.Integer, db.ForeignKey('teams.id'), nullable = False)
   league_id = db.Column(db.Integer, nullable = False)
 

@@ -23,11 +23,10 @@ with app.app_context():
   angela_team = Team(name = "Angela's Team", owner_id = 4, league_id = 1)
 
   player_13 = Player(
-            playerId = 13,
-            jersey = "12",
-            last_name = "Brady",
-            first_name = "Tom",
+            player_id = 13,
             full_name = "Tom Brady",
+            first_name = "Tom",
+            last_name = "Brady",
             nfl_team = "TB",
             position = "QB",
             height = "6-4",
@@ -221,5 +220,11 @@ with app.app_context():
   db.session.add(ian_team)
   db.session.add(javier_team)
   db.session.add(angela_team)
+  db.session.commit()
+
+  db.session.add(player_13)
+  db.session.commit()
+
+  db.session.add(ffsplayer_1)
 
   db.session.commit()
