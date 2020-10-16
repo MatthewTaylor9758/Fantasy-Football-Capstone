@@ -29,18 +29,15 @@ def create_ffsplayer():
 
 @ffsplayers_routes.route('/<leagueId>/<teamId>')
 def get_team_ffsplayers(leagueId, teamId):
-  print(leagueId, teamId)
   league_ffsplayers = FFSplayer.query.filter(FFSplayer.league_id == leagueId).all()
   league_ffsplayers_dict = [player.to_dict() for player in league_ffsplayers]
-  print(league_ffsplayers_dict)
-
-  print(int(league_ffsplayers_dict[0]['team_id']) == int(teamId))
   team_ffsplayers = [player for player in league_ffsplayers_dict if int(player['team_id']) == int(teamId)]
-  print(team_ffsplayers)
-  players_dict = {num: player for num, player in enumerate(team_ffsplayers, 1)}
-  print(players_dict)
-
-  team_ffsplayers_detail = Player.query.filter(Player.player_id == )
+  team_ffsplayers_ids = [player['player_id'] for player in team_ffsplayers]
+  team_nfl_players = []
+  for player_id in team_ffsplayers_ids:
+    nfl_player = Player.query.filter(Player.player_id == player_id).first()
+    team_nfl_players.append(nfl_player.to_dict())
+  players_dict = {num: player for num, player in enumerate(team_nfl_players, 1)}
   return players_dict
 
 @ffsplayers_routes.route('/<ffsplayerId>', methods=['DELETE'])

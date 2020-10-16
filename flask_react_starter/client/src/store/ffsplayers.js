@@ -29,6 +29,11 @@ export const get_ffsplayer = (league_id, team_id) => async dispatch => {
   const res = await fetch(`/api/ffsplayers/${league_id}/${team_id}`);
   const data = await res.json();
   console.log(data);
+  if (res.ok && !data.errors) {
+    localStorage.setItem('team_players', JSON.stringify(data))
+    dispatch(grab_ffsplayer(data))
+  }
+  return data;
 }
 
 let team_ffsplayers = JSON.parse(localStorage.getItem('ffsplayers'));
@@ -37,6 +42,8 @@ console.log(initialState);
 
 export default function ffsplayers(state=initialState, action) {
   switch (action.type) {
+    case GET_FFSPLAYERS:
+      return action.ffsplayer
     default:
       return state;
   }

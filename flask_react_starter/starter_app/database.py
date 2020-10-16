@@ -34,8 +34,21 @@ with app.app_context():
             dob = "1977-08-03",
             college = "Michigan"
   )
+  player_3379 = Player(
+            player_id = 3379,
+            full_name = "Christian McCaffrey",
+            first_name = "Christian",
+            last_name = "McCaffrey",
+            nfl_team = "CAR",
+            position = "RB",
+            height = "5-11",
+            weight = "205",
+            dob = "1996-06-07",
+            college = "Stanford"
+  )
 
   ffsplayer_1 = FFSplayer(player_id = 13, team_id = 1, league_id = 1)
+  ffsplayer_2 = FFSplayer(player_id = 3379, team_id = 1, league_id = 1)
         # {
         #     "playerId": "14",
         #     "jersey": "9",
@@ -48,19 +61,6 @@ with app.app_context():
         #     "weight": "209",
         #     "dob": "1979-01-15",
         #     "college": "Purdue"
-        # }
-        # {
-        #     "playerId": "3379",
-        #     "jersey": "22",
-        #     "last_name": "McCaffrey",
-        #     "first_name": "Christian",
-        #     "full_name": "Christian McCaffrey",
-        #     "nfl_team": "CAR",
-        #     "position": "RB",
-        #     "height": "5-11",
-        #     "weight": "205",
-        #     "dob": "1996-06-07",
-        #     "college": "Stanford"
         # }
         # {
         #     "playerId": "3354",
@@ -223,8 +223,10 @@ with app.app_context():
   db.session.commit()
 
   db.session.add(player_13)
+  db.session.add(player_3379)
   db.session.commit()
 
   db.session.add(ffsplayer_1)
+  db.session.add(ffsplayer_2)
 
   db.session.commit()
