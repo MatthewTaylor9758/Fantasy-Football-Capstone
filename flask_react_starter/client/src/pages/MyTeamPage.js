@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { getTeam } from '../store/teams';
 import { getLeague } from '../store/leagues';
+import { get_ffsplayer } from '../store/ffsplayers';
 import { makeStyles, Container, TextField, Button, Typography } from '@material-ui/core';
 import NavBar from '../components/NavBar';
 
@@ -14,8 +15,9 @@ function MyTeamPage() {
   const userId = user.id;
   const teamLeagueId = team.league_id;
 
-  const handleGetPlayers = (e) => {
-
+  const handleGetPlayers = async (e) => {
+    const res = await dispatch(get_ffsplayer(team.id, teamLeagueId))
+    console.log(res);
   }
 
   const handleGetLeague = async (e) => {
