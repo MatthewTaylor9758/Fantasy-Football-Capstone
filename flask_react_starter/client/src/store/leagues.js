@@ -1,5 +1,5 @@
 import Cookies from 'js-cookie';
-
+import { get_ffsplayer } from './ffsplayers';
 const GET_LEAGUE = 'GET_LEAGUE';
 const REMOVE_LEAGUE = 'REMOVE_LEAGUE';
 const ADD_LEAGUE = 'ADD_LEAGUE';
@@ -25,7 +25,7 @@ export const addLeague = (league) => {
   }
 }
 
-export const getLeague = (leagueId) => async dispatch => {
+export const getLeague = (leagueId, teamId) => async dispatch => {
   const res = await fetch(`/api/leagues/${leagueId}`, {
     method: 'PUT',
     headers: {
@@ -38,11 +38,13 @@ export const getLeague = (leagueId) => async dispatch => {
   if (res.ok && data.league) {
     localStorage.setItem('league', JSON.stringify(data.league));
     dispatch(grabLeague(data.league))
+    dispatch(get_ffsplayer(leagueId, teamId))
   }
   return data;
 }
 
 let league = JSON.parse(localStorage.getItem('league'));
+// let ffsplayers = JSON.parse(localStorage.getItem('team_players'))
 const initialState = league ? league : {};
 console.log(initialState);
 

@@ -32,11 +32,12 @@ export const get_ffsplayer = (league_id, team_id) => async dispatch => {
   if (res.ok && !data.errors) {
     localStorage.setItem('team_players', JSON.stringify(data))
     dispatch(grab_ffsplayer(data))
+    return data;
   }
   return data;
 }
 
-let team_ffsplayers = JSON.parse(localStorage.getItem('ffsplayers'));
+let team_ffsplayers = JSON.parse(localStorage.getItem('team_players'));
 const initialState = team_ffsplayers ? team_ffsplayers : {};
 console.log(initialState);
 

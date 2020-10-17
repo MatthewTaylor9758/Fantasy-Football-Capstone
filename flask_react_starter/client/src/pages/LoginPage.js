@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { makeStyles, Container, TextField, Button, Card, Typography } from '@material-ui/core';
 import NavBar from '../components/NavBar';
+import { getTeam } from '../store/teams';
 import '../styles/loginPage.css';
 
 function LoginPage() {
@@ -31,12 +32,13 @@ function LoginPage() {
       // console.log(await res.json());
       // ***TO DO***: Set up a second (or more) conditional dispatch(s) for grabbing a team, league, and ffsplayers for that team/league USE 'res' TO DO IT!!!
       console.log(res);
-      debugger
       if (res['1']) {
         console.log(res['1'])
         setErrors(Object.values(res['1']));
       } else {
+        debugger
         window.location.href = `./myTeam/${res.user.id}`
+        await dispatch(getTeam(res.user.id))
       }
     }
     // setUserInfo()

@@ -1,4 +1,6 @@
 import Cookies from 'js-cookie';
+import { getLeague } from './leagues';
+
 
 const GET_TEAM = 'GET_TEAM';
 const REMOVE_TEAM = 'REMOVE_TEAM';
@@ -41,6 +43,7 @@ export const getTeam = (ownerId) => async dispatch => {
   if (response.ok && data.team) {
     localStorage.setItem('team', JSON.stringify(data.team));
     dispatch(grabTeam(data.team));
+    dispatch(getLeague(data.team.league_id, data.team.id))
     return data;
   }
   return data;

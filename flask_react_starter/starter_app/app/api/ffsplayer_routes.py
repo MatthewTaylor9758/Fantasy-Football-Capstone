@@ -29,6 +29,9 @@ def create_ffsplayer():
 
 @ffsplayers_routes.route('/<leagueId>/<teamId>')
 def get_team_ffsplayers(leagueId, teamId):
+  # Gets all players in league of the user
+  # Then converts the players in the league into dicts
+  # Then
   league_ffsplayers = FFSplayer.query.filter(FFSplayer.league_id == leagueId).all()
   league_ffsplayers_dict = [player.to_dict() for player in league_ffsplayers]
   team_ffsplayers = [player for player in league_ffsplayers_dict if int(player['team_id']) == int(teamId)]
