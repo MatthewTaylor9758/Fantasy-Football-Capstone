@@ -4,8 +4,9 @@ import { NavLink } from 'react-router-dom';
 import { getTeam } from '../store/teams';
 import { getLeague } from '../store/leagues';
 import { get_ffsplayer } from '../store/ffsplayers';
-import { makeStyles, Container, TextField, Button, Typography } from '@material-ui/core';
+import { makeStyles, Container, TextField, Button, Typography, Grid } from '@material-ui/core';
 import NavBar from '../components/NavBar';
+
 
 function MyTeamPage() {
   const dispatch = useDispatch();
@@ -60,27 +61,157 @@ function MyTeamPage() {
   //   console.log(Object.values(...Object.values(ffsplayers)))
   // }
 
+  const logout = () => {
+    localStorage.clear()
+    window.location.href = '/login'
+  }
+
+  const useStyles = makeStyles((theme) => ({
+    // columns: {
+    //   display: 'flex',
+    //   justifyContent: 'space-between',
+    //   width: '100%'
+    // },
+    outsideLinks: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      borderRight: '2px solid gray',
+      height: '100%'
+    },
+    outsideContainer: {
+      background: 'linear-gradient(-45deg, rgba(255, 255, 255, .2), rgba(25, 111, 12, .7))',
+      height: '100vh'
+    },
+    infoContainer: {
+      position: 'absolute',
+      top: '100px',
+      minWidth: 'fit-content',
+    },
+    playerInfo: {
+      height: 'fit-content',
+      minWidth: 'fit-content',
+      marginLeft: '5em'
+    },
+    logoutDiv: {
+      width: '100%',
+      display: 'flex',
+      justifyContent: 'flex-end'
+    },
+    logoutButton: {
+      '&:hover': {
+        backgroundColor: 'rgb(200, 0, 0)'
+      }
+    },
+    gridTitle: {
+      display: 'flex',
+      minWidth: 'fit-content',
+      fontWeight: '600'
+    },
+    playerInfoContainer: {
+      paddingLeft: '0',
+      width: '100%'
+    },
+    playerItem: {
+      display: 'flex',
+      justifyContent: 'center'
+    },
+    linksContainer: {
+      height: '100%'
+    },
+    stuffContainer: {
+      height: '100%'
+    }
+  }))
+
+  const classes = useStyles()
 
   return (
     <>
       <NavBar />
-      <Container>
-        <Typography variant='h1'>This is the My Team Page</Typography>
-        <Button onClick={handleGetPlayers}>Show My Teams</Button>
-        <Button onClick={handleGetLeague}>Get League</Button>
-        <Button onClick={handleJoinLeague}>Join League</Button>
-        <Button onClick={handleGetTeam}>Get Team</Button>
-        {/* <Button onClick={testing}>Test</Button> */}
-        <div>
-          {playerArr ? playerArr.map(player => {
-            return (
-              <div>
-                {Object.values(player)}
+      <div className={classes.outsideContainer}>
+        <Container className={classes.infoContainer}>
+          {/* <Button onClick={handleGetPlayers}>Show My Teams</Button>
+          <Button onClick={handleGetLeague}>Get League</Button>
+          <Button onClick={handleJoinLeague}>Join League</Button>
+          <Button onClick={handleGetTeam}>Get Team</Button> */}
+          {/* <Button onClick={testing}>Test</Button> */}
+          <div className={classes.logoutDiv}>
+            <Button onClick={logout} className={classes.logoutButton}>Log out</Button>
+          </div>
+          <Grid container xs={12} className={classes.stuffContainer}>
+            <Grid item xs={2} className={classes.linksContainer}>
+              <div className={classes.outsideLinks}>
+                <NavLink to='#'>NFL Fantasy</NavLink>
+                <NavLink to='#'>CBS Fantasy</NavLink>
+                <NavLink to='#'>ESPN Fantasy</NavLink>
+                <NavLink to='#'>Yahoo Fantasy</NavLink>
               </div>
-            )
-          }) : null}
-        </div>
-      </Container>
+            </Grid>
+            <Grid container item xs={9} className={classes.playerInfo}>
+              <Grid container item>
+                <Grid item xs={2} className={classes.gridTitle}>
+                  Name
+                  </Grid>
+                <Grid item xs={1} className={classes.gridTitle}>
+                  Team
+                  </Grid>
+                <Grid item xs={1} className={classes.gridTitle}>
+                  Position
+                  </Grid>
+                <Grid item xs={1} className={classes.gridTitle}>
+                  Height
+                  </Grid>
+                <Grid item xs={1} className={classes.gridTitle}>
+                  Weight
+                  </Grid>
+                <Grid item xs={2} className={classes.gridTitle}>
+                  DOB
+                  </Grid>
+                <Grid item xs={2} className={classes.gridTitle}>
+                  College
+                  </Grid>
+                <Grid item xs={2}>
+
+                </Grid>
+              </Grid>
+              <Grid className={classes.playerInfoContainer}>
+                {playerArr ? playerArr.map(player => {
+                  return (
+                    <Grid container item>
+                      <Grid item xs={2}>
+                        {player['full_name']}
+                      </Grid>
+                      <Grid item xs={1}>
+                        {player['nfl_team']}
+                      </Grid>
+                      <Grid item xs={1}>
+                        {player['position']}
+                      </Grid>
+                      <Grid item xs={1}>
+                        {player['height']}
+                      </Grid>
+                      <Grid item xs={1}>
+                        {player['weight']}
+                      </Grid>
+                      <Grid item xs={2}>
+                        {player['dob']}
+                      </Grid>
+                      <Grid item xs={2}>
+                        {player['college']}
+                      </Grid>
+                      <Grid item xs={2}>
+
+                      </Grid>
+                    </Grid>
+                  )
+                }) : null}
+              </Grid>
+            </Grid>
+
+          </Grid>
+        </Container>
+      </div>
     </>
   )
 }

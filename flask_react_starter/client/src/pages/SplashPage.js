@@ -5,6 +5,8 @@ import { makeStyles, Container, TextField, Button, Typography } from '@material-
 import NavBar from '../components/NavBar';
 
 function SplashPage() {
+  const user = useSelector(state => state.auth)
+
   const useStyles = makeStyles({
     outerContainer: {
       backgroundImage: 'linear-gradient(to top, rgba(255, 255, 255, .2), rgba(25, 111, 12, .7))',
@@ -13,6 +15,11 @@ function SplashPage() {
     }
   })
   const classes = useStyles();
+
+  const test = () => {
+    console.log(user);
+    localStorage.getItem('user') ? console.log(user) : console.log('no user')
+  }
 
   return (
     <>
@@ -29,6 +36,7 @@ function SplashPage() {
             <li><NavLink to='/players'>Available Players</NavLink></li>
           </ul>
         </nav>
+        <button onClick={test}>test</button>
       </Container>
     </>
   )

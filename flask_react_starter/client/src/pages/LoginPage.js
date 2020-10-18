@@ -37,8 +37,8 @@ function LoginPage() {
         setErrors(Object.values(res['1']));
       } else {
         debugger
-        window.location.href = `./myTeam/${res.user.id}`
         await dispatch(getTeam(res.user.id))
+        window.location.href = `./myTeam/${res.user.id}`
       }
     }
     // setUserInfo()
