@@ -6,6 +6,7 @@ import { makeStyles, Container, TextField, Button, Card, Typography } from '@mat
 import NavBar from '../components/NavBar';
 import { getTeam } from '../store/teams';
 import '../styles/loginPage.css';
+import hiclipart_football from '../images/hiclipart_football.png';
 
 function LoginPage() {
   const dispatch = useDispatch();
@@ -109,6 +110,12 @@ function LoginPage() {
       '&:hover': {
         backgroundColor: 'rgba(110, 12, 25, 1)',
       }
+    },
+    homeButton: {
+      backgroundColor: 'rgba(255, 255, 255, .15)',
+      marginTop: '1em',
+      borderRadius: '10px',
+      padding: '0',
     }
   }));
 
@@ -119,10 +126,10 @@ function LoginPage() {
       <div class='area'>
         <Card id='login-form' className={classes.outerContainer}>
           <ul class="footballs">
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
+              <div><img src={hiclipart_football}></img></div>
+              <div><img src={hiclipart_football}></img></div>
+              <div><img src={hiclipart_football}></img></div>
+              <div><img src={hiclipart_football}></img></div>
           </ul>
           <div>
             <form method='put' action='/api/users/' onSubmit={handleSubmit} className={classes.loginForm}>
@@ -144,9 +151,14 @@ function LoginPage() {
                 onChange={handlePassword}/>
               <Button className={classes.loginButton} type='submit'>Log in</Button>
             </form>
-            <Button className={classes.signupButton}>
-              <NavLink to='/signup' className={classes.links}>Don't have an account? Sign up</NavLink>
-            </Button>
+            <div style={{display: 'flex', flexDirection: 'column'}}>
+              <Button className={classes.signupButton}>
+                <NavLink to='/signup' className={classes.links}>Don't have an account? Sign up</NavLink>
+              </Button>
+              <Button className={classes.homeButton}>
+                <NavLink to='/' className={classes.links}>Home</NavLink>
+              </Button>
+            </div>
           </div>
         </Card>
       </div>

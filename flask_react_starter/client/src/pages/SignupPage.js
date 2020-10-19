@@ -6,6 +6,7 @@ import { makeStyles, Container, TextField, Button, Card, Typography } from '@mat
 import NavBar from '../components/NavBar';
 import { red } from '@material-ui/core/colors';
 import '../styles/signupPage.css';
+import hiclipart_football from '../images/hiclipart_football.png';
 
 function SignupPage() {
   const dispatch = useDispatch();
@@ -124,6 +125,18 @@ function SignupPage() {
         backgroundColor: 'rgba(110, 12, 25, 1)',
         color: 'white'
       }
+    },
+    homeButton: {
+      backgroundColor: 'rgba(255, 255, 255, 0)',
+      marginTop: '1em',
+      borderRadius: '10px',
+      padding: '0',
+    },
+    links: {
+      textDecoration: 'none',
+      fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+      padding: '.7em',
+      zIndex: '10',
     }
   }));
 
@@ -135,10 +148,10 @@ function SignupPage() {
       <div class='area'>
         <Card className={classes.outerContainer}>
             <ul class="footballs">
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
+              <div><img src={hiclipart_football}></img></div>
+              <div><img src={hiclipart_football}></img></div>
+              <div><img src={hiclipart_football}></img></div>
+              <div><img src={hiclipart_football}></img></div>
             </ul>
 
           <form action='/api/users/' method='post' onSubmit={handleSubmit} className={classes.signupForm}>
@@ -184,6 +197,9 @@ function SignupPage() {
               }}
               />
             <Button type='submit' className={classes.signupButton}>Sign up</Button>
+            <Button className={classes.homeButton}>
+              <NavLink to='/' className={classes.links}>Home</NavLink>
+            </Button>
           </form>
         </Card>
       </div>

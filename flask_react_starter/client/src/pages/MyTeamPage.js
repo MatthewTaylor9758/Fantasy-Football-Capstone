@@ -91,7 +91,7 @@ function MyTeamPage() {
     playerInfo: {
       height: 'fit-content',
       minWidth: 'fit-content',
-      marginLeft: '5em'
+      marginLeft: '5em',
     },
     logoutDiv: {
       width: '100%',
@@ -105,12 +105,19 @@ function MyTeamPage() {
     },
     gridTitle: {
       display: 'flex',
+      justifyContent: 'center',
+      minWidth: 'fit-content',
+      fontWeight: '600'
+    },
+    gridTitleName: {
+      display: 'flex',
       minWidth: 'fit-content',
       fontWeight: '600'
     },
     playerInfoContainer: {
       paddingLeft: '0',
-      width: '100%'
+      paddingTop: '.5em',
+      width: '100%',
     },
     playerItem: {
       display: 'flex',
@@ -121,6 +128,20 @@ function MyTeamPage() {
     },
     stuffContainer: {
       height: '100%'
+    },
+    helpLinks: {
+      marginTop: '.5em',
+      textDecoration: 'none'
+    },
+    playerData: {
+      display: 'flex',
+      justifyContent: 'center',
+      border: '1px solid black',
+      padding: '.2em 0'
+    },
+    playerDataName: {
+      border: '1px solid black',
+      padding: '.2em 0'
     }
   }))
 
@@ -142,15 +163,15 @@ function MyTeamPage() {
           <Grid container xs={12} className={classes.stuffContainer}>
             <Grid item xs={2} className={classes.linksContainer}>
               <div className={classes.outsideLinks}>
-                <NavLink to='#'>NFL Fantasy</NavLink>
-                <NavLink to='#'>CBS Fantasy</NavLink>
-                <NavLink to='#'>ESPN Fantasy</NavLink>
-                <NavLink to='#'>Yahoo Fantasy</NavLink>
+                <a href='https://fantasy.nfl.com/' className={classes.helpLinks}>NFL Fantasy</a>
+                <a href='https://www.cbssports.com/fantasy/' className={classes.helpLinks}>CBS Fantasy</a>
+                <a href='https://www.espn.com/fantasy/football/' className={classes.helpLinks}>ESPN Fantasy</a>
+                <a href='https://football.fantasysports.yahoo.com/' className={classes.helpLinks}>Yahoo Fantasy</a>
               </div>
             </Grid>
             <Grid container item xs={9} className={classes.playerInfo}>
               <Grid container item>
-                <Grid item xs={2} className={classes.gridTitle}>
+                <Grid item xs={2} className={classes.gridTitleName}>
                   Name
                   </Grid>
                 <Grid item xs={1} className={classes.gridTitle}>
@@ -179,25 +200,25 @@ function MyTeamPage() {
                 {playerArr ? playerArr.map(player => {
                   return (
                     <Grid container item>
-                      <Grid item xs={2}>
+                      <Grid item xs={2} className={classes.playerDataName}>
                         {player['full_name']}
                       </Grid>
-                      <Grid item xs={1}>
+                      <Grid item xs={1} className={classes.playerData}>
                         {player['nfl_team']}
                       </Grid>
-                      <Grid item xs={1}>
+                      <Grid item xs={1} className={classes.playerData}>
                         {player['position']}
                       </Grid>
-                      <Grid item xs={1}>
+                      <Grid item xs={1} className={classes.playerData}>
                         {player['height']}
                       </Grid>
-                      <Grid item xs={1}>
+                      <Grid item xs={1} className={classes.playerData}>
                         {player['weight']}
                       </Grid>
-                      <Grid item xs={2}>
+                      <Grid item xs={2} className={classes.playerData}>
                         {player['dob']}
                       </Grid>
-                      <Grid item xs={2}>
+                      <Grid item xs={2} className={classes.playerData}>
                         {player['college']}
                       </Grid>
                       <Grid item xs={2}>

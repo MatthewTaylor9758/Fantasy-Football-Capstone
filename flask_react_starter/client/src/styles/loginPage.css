@@ -5,18 +5,10 @@
 	/* background-size: 400% 400%;
 	animation: gradient 15s ease infinite; */
 }
-/*
-@keyframes gradient {
-	0% {
-		background-position: 0% 50%;
-	}
-	50% {
-		background-position: 100% 50%;
-	}
-	100% {
-		background-position: 0% 50%;
-	}
-} */
+img {
+  width: 80px;
+  height: auto;
+}
 .area {
   width: 100%;
 	height:100vh;
@@ -31,47 +23,48 @@
   margin: 0;
   padding: 0;
 }
-.footballs li{
+.footballs div{
   position: absolute;
   display: block;
   list-style: none;
-  width: 80px;
-  height: 35px;
-  background:rgba(110, 12, 25, .4);
+  /* width: 80px;
+  height: 35px; */
+  /* background:rgba(110, 12, 25, .4); */
   animation: animate 5s linear infinite;
-  top: -40px;
-  border-radius: 100%/100%;
+  top: -140px;
+  /* border-radius: 100%/100%; */
 }
-.footballs li:nth-child(1) {
+.footballs div:nth-child(1) {
   position: absolute;
   left: 5%;
   animation-delay: 3s;
+  transform-origin: center;
 }
-.footballs li:nth-child(2) {
+.footballs div:nth-child(2) {
   position: absolute;
-  left: 20%;
-  animation-duration: 10s;
+  left: 25%;
+  animation-duration: 8s;
 }
-.footballs li:nth-child(3) {
+.footballs div:nth-child(3) {
   position: absolute;
   left: 70%;
-  animation-delay: 1s;
+  animation-delay: 3s;
   animation-duration: 7s;
 }
-.footballs li:nth-child(4) {
+.footballs div:nth-child(4) {
   position: absolute;
   left: 90%;
   animation-duration: 9s;
-  animation-delay: 3s;
+  animation-delay: 1s;
 }
 
-@keyframes animate {
+/* @keyframes animate {
   0%{
-      transform: translateY(110vh) rotate(0deg);
+      transform: translateY(120vh) rotate(0deg);
       opacity: 1;
   }
   100%{
-      transform: translateY(0) rotate(1080deg);
+      transform: translateY(-30) rotate(1080deg);
       opacity: 0;
   }
-}
+} */
