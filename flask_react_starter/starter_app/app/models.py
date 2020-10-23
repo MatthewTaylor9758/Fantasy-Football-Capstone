@@ -78,7 +78,7 @@ class Player(db.Model):
 
   # id = db.Column(db.Integer, nullable = False, autoincrement = True)
   player_id = db.Column(db.Integer, nullable= False, primary_key = True, autoincrement = False)
-  full_name = db.Column(db.String(100), nullable = False, unique = True)
+  full_name = db.Column(db.String(100), nullable = False)
   first_name = db.Column(db.String(50), nullable = False)
   last_name = db.Column(db.String(50), nullable = False)
   nfl_team = db.Column(db.String(100), nullable = False)
@@ -105,8 +105,8 @@ class Player(db.Model):
 class FFSplayer(db.Model):
   __tablename__ = 'ffsplayers'
   __table_args__ = (
-    ForeignKeyConstraint(['team_id', 'league_id'], ['teams.id', 'teams.league_id'], name='team_league_fk'),
-    UniqueConstraint('player_id', 'league_id', name='player_in_league_only_once_uidx')
+    # ForeignKeyConstraint(['team_id', 'league_id'], ['teams.id', 'teams.league_id'], name='team_league_fk'),
+    UniqueConstraint('player_id', 'league_id', name='player_in_league_only_once_uidx'),
   )
   id = db.Column(db.Integer, nullable = False,  primary_key = True)
   player_id = db.Column(db.Integer, db.ForeignKey('players.player_id'), nullable = False)

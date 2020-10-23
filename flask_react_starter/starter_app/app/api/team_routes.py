@@ -5,8 +5,10 @@ team_routes = Blueprint('teams', __name__)
 
 @team_routes.route('/<ownerId>', methods=['GET', 'PUT'])
 def get_single_team(ownerId):
-  data = request.json
+  # data = request.json
+  # print(data)
   team = Team.query.filter(Team.owner_id == ownerId).first()
+  print(team)
   team_dict = team.to_dict()
   return {'team': team_dict}
 
