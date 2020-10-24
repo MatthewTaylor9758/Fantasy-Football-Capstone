@@ -10,7 +10,7 @@ function AvailPlayers() {
   const csrfToken = Cookies.get('XSRF-TOKEN');
   const handleShowAllPlayers = async (e) => {
     console.log(csrfToken);
-    const res = await fetch('https://www.fantasyfootballnerd.com/service/players/json/zj6uirc6rfwr/');
+    const res = await fetch('/api/players');
     const data = await res.json();
     console.log(data);
     players.length ? console.log(true) : console.log(false)
