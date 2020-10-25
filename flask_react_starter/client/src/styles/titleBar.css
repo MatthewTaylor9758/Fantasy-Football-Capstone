@@ -1,0 +1,7 @@
+#secondBar {
+  position: sticky;
+  top: 64px;
+  height: fit-content;
+  padding: 5px 24px 5px 24px;
+  max-height: 31px;
+}

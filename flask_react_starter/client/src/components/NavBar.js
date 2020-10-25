@@ -11,7 +11,8 @@ function NavBar() {
     navBar: {
       backgroundImage: 'radial-gradient(rgba(110, 12, 25, .9), rgb(110, 12, 25, .9), rgba(0, 0, 0, .7))',
       width: '100%',
-      padding: '0'
+      padding: '0',
+      maxHeight: '64px'
     },
     leftSide: {
       display: 'flex',
