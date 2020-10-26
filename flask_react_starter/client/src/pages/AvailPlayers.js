@@ -8,11 +8,12 @@ import '../styles/titleBar.css';
 function AvailPlayers() {
   const dispatch = useDispatch()
   const myTeam = Object.values(useSelector(state => state.ffsplayers))
+  const myLeagueId = useSelector(state => state.leagues.id)
   const [players, updatePlayers] = useState([])
   const csrfToken = Cookies.get('XSRF-TOKEN');
   const handleShowAllPlayers = async (e) => {
     console.log(csrfToken);
-    const res = await fetch('/api/players');
+    const res = await fetch(`/api/players/${myLeagueId}`);
     const data = await res.json();
     console.log(data.players);
     updatePlayers(data.players);
@@ -21,7 +22,7 @@ function AvailPlayers() {
 
   const handleShowSpecificPlayers = async (e) => {
     console.log(e.target.value)
-    const res = await fetch(`/api/players/${e.target.value}`);
+    const res = await fetch(`/api/players/${myLeagueId}/${e.target.value}`);
     const data = await res.json();
     console.log(data.players);
     updatePlayers(data.players);
@@ -36,7 +37,7 @@ function AvailPlayers() {
   // }, [players])
 
   const handleAddPlayer = (e) => {
-
+    console.log(e.target.value)
   }
 
   const useStyles = makeStyles((theme) => ({
@@ -264,7 +265,7 @@ function AvailPlayers() {
                         {player['college']}
                       </Grid>
                       <Grid item xs={1}>
-                        <Button onClick={handleAddPlayer}>Add</Button>
+                        <button value={[player['full_name'], player['dob']]} onClick={handleAddPlayer}>Add</button>
                       </Grid>
                     </Grid>
                   )
