@@ -5,10 +5,14 @@ import { makeStyles, Container, TextField, Button, Typography, Grid, AppBar } fr
 import Cookies from 'js-cookie';
 import NavBar from '../components/NavBar';
 import '../styles/titleBar.css';
+import { new_ffsplayer } from '../store/ffsplayers';
+
 function AvailPlayers() {
   const dispatch = useDispatch()
   const myTeam = Object.values(useSelector(state => state.ffsplayers))
+  const myTeamId = useSelector(state => state.teams.id)
   const myLeagueId = useSelector(state => state.leagues.id)
+  const ffsplayers = useSelector(state => state.ffsplayers);
   const [players, updatePlayers] = useState([])
   const csrfToken = Cookies.get('XSRF-TOKEN');
   const handleShowAllPlayers = async (e) => {
@@ -32,12 +36,18 @@ function AvailPlayers() {
     handleShowAllPlayers()
   }, [])
 
+  useEffect(() => {
+    handleShowAllPlayers();
+  }, [ffsplayers])
+
   // useEffect(() => {
   //   handleShowSpecificPlayers()
   // }, [players])
 
-  const handleAddPlayer = (e) => {
-    console.log(e.target.value)
+  const handleAddPlayer = async (e) => {
+    console.log(e.target.value, myTeamId, myLeagueId);
+    const res = await dispatch(new_ffsplayer(e.target.value, myLeagueId, myTeamId))
+    console.log(res)
   }
 
   const useStyles = makeStyles((theme) => ({
@@ -265,7 +275,7 @@ function AvailPlayers() {
                         {player['college']}
                       </Grid>
                       <Grid item xs={1}>
-                        <button value={[player['full_name'], player['dob']]} onClick={handleAddPlayer}>Add</button>
+                        <button value={player['player_id']} onClick={handleAddPlayer}>Add</button>
                       </Grid>
                     </Grid>
                   )
