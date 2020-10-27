@@ -8,7 +8,7 @@ import AvailPlayers from './pages/AvailPlayers';
 import SplashPage from './pages/SplashPage';
 import { setUser } from './store/auth'
 import UserList from './components/UsersList';
-
+import { AuthRoute, ProtectedRoute } from './components/Routes';
 
 function App() {
     // const [loading, setLoading] = useState(true)
@@ -25,24 +25,17 @@ function App() {
     //     loadUser();
     // }, [dispatch]);
     const user = localStorage.getItem('user');
-    const currentUser = useSelector(state => state.auth);
+    const currentUser = useSelector(state => state.auth.id);
     console.log(currentUser);
     console.log("____Rendering app_____")
-    // if (loading) {
-    //     return <p>loading...</p>
-    //   }
     return (
         <BrowserRouter>
             <Switch>
-                <Route exact path="/users" component={UserList}></Route>
-                <Route exact path='/login' component={LoginPage}></Route>
-                <Route exact path='/signup' component={SignupPage}></Route>
-                { user &&
-                    <Route exact path='/myTeam/:id' component={MyTeamPage}></Route>
-                }
-                { user &&
-                    <Route exact path='/players' component={AvailPlayers}></Route>
-                }
+                <Route exact path="/users" component={UserList} currentUserId={currentUser}></Route>
+                <Route exact path='/login' component={LoginPage} currentUserId={currentUser}></Route>
+                <Route exact path='/signup' component={SignupPage} currentUserId={currentUser}></Route>
+                <ProtectedRoute path='/myTeam/:id' component={MyTeamPage} currentUserId={currentUser}></ProtectedRoute>
+                <ProtectedRoute exact path='/players' component={AvailPlayers} currentUserId={currentUser}></ProtectedRoute>
                 <Route path="/" component={SplashPage}></Route>
             </Switch>
         </BrowserRouter>

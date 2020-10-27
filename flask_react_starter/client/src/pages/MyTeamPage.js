@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 import { getTeam } from '../store/teams';
 import { getLeague } from '../store/leagues';
 import { get_ffsplayer, remove_ffsplayer } from '../store/ffsplayers';
@@ -18,6 +18,10 @@ function MyTeamPage() {
   const [userTeam, setUserTeam] = useState('');
   const userId = user.id;
   const teamLeagueId = team.league_id;
+
+  if (!user) {
+    window.location.href = '/';
+  }
 
 
   const handleGetPlayers = async (e) => {
@@ -155,96 +159,101 @@ function MyTeamPage() {
 
   return (
     <>
-      <NavBar />
-      <div className={classes.outsideContainer}>
-        <Container className={classes.infoContainer}>
-          {/* <Button onClick={handleGetPlayers}>Show My Teams</Button>
-          <Button onClick={handleGetLeague}>Get League</Button>
-          <Button onClick={handleJoinLeague}>Join League</Button>
-          <Button onClick={handleGetTeam}>Get Team</Button> */}
-          {/* <Button onClick={testing}>Test</Button> */}
-          <div className={classes.logoutDiv}>
-            <Button onClick={logout} className={classes.logoutButton}>Log out</Button>
-          </div>
-          <Grid container item xs={12} className={classes.stuffContainer}>
-            <Grid item xs={2} className={classes.linksContainer}>
-              <div className={classes.outsideLinks}>
-                <a href='https://fantasy.nfl.com/' className={classes.helpLinks}>NFL Fantasy</a>
-                <a href='https://www.cbssports.com/fantasy/' className={classes.helpLinks}>CBS Fantasy</a>
-                <a href='https://www.espn.com/fantasy/football/' className={classes.helpLinks}>ESPN Fantasy</a>
-                <a href='https://football.fantasysports.yahoo.com/' className={classes.helpLinks}>Yahoo Fantasy</a>
+      {user ?
+        <>
+          <NavBar />
+          <div className={classes.outsideContainer}>
+            <Container className={classes.infoContainer}>
+              {/* <Button onClick={handleGetPlayers}>Show My Teams</Button>
+              <Button onClick={handleGetLeague}>Get League</Button>
+              <Button onClick={handleJoinLeague}>Join League</Button>
+              <Button onClick={handleGetTeam}>Get Team</Button> */}
+              {/* <Button onClick={testing}>Test</Button> */}
+              <div className={classes.logoutDiv}>
+                <Button onClick={logout} className={classes.logoutButton}>Log out</Button>
               </div>
-            </Grid>
-            <Grid container item xs={9} className={classes.playerInfo}>
-              <Grid container item>
-                <Grid item xs={2} className={classes.gridTitleName}>
-                  Name
-                  </Grid>
-                <Grid item xs={1} className={classes.gridTitle}>
-                  Team
-                  </Grid>
-                <Grid item xs={1} className={classes.gridTitle}>
-                  Position
-                  </Grid>
-                <Grid item xs={1} className={classes.gridTitle}>
-                  Height
-                  </Grid>
-                <Grid item xs={1} className={classes.gridTitle}>
-                  Weight
-                  </Grid>
-                <Grid item xs={2} className={classes.gridTitle}>
-                  DOB
-                  </Grid>
-                <Grid item xs={2} className={classes.gridTitle}>
-                  College
-                  </Grid>
-                <Grid item xs={1} className={classes.gridTitle}>
-
+              <Grid container item xs={12} className={classes.stuffContainer}>
+                <Grid item xs={2} className={classes.linksContainer}>
+                  <div className={classes.outsideLinks}>
+                    <a href='https://fantasy.nfl.com/' className={classes.helpLinks}>NFL Fantasy</a>
+                    <a href='https://www.cbssports.com/fantasy/' className={classes.helpLinks}>CBS Fantasy</a>
+                    <a href='https://www.espn.com/fantasy/football/' className={classes.helpLinks}>ESPN Fantasy</a>
+                    <a href='https://football.fantasysports.yahoo.com/' className={classes.helpLinks}>Yahoo Fantasy</a>
+                  </div>
                 </Grid>
-                <Grid item xs={1}>
+                <Grid container item xs={9} className={classes.playerInfo}>
+                  <Grid container item>
+                    <Grid item xs={2} className={classes.gridTitleName}>
+                      Name
+                      </Grid>
+                    <Grid item xs={1} className={classes.gridTitle}>
+                      Team
+                      </Grid>
+                    <Grid item xs={1} className={classes.gridTitle}>
+                      Position
+                      </Grid>
+                    <Grid item xs={1} className={classes.gridTitle}>
+                      Height
+                      </Grid>
+                    <Grid item xs={1} className={classes.gridTitle}>
+                      Weight
+                      </Grid>
+                    <Grid item xs={2} className={classes.gridTitle}>
+                      DOB
+                      </Grid>
+                    <Grid item xs={2} className={classes.gridTitle}>
+                      College
+                      </Grid>
+                    <Grid item xs={1} className={classes.gridTitle}>
 
-                </Grid>
-              </Grid>
-              <Grid className={classes.playerInfoContainer}>
-                {playerArr ? playerArr.map(player => {
-                  return (
-                    <Grid container item>
-                      <Grid item xs={2} className={classes.playerDataName}>
-                        {player['full_name']}
-                      </Grid>
-                      <Grid item xs={1} className={classes.playerData}>
-                        {player['nfl_team']}
-                      </Grid>
-                      <Grid item xs={1} className={classes.playerData}>
-                        {player['position']}
-                      </Grid>
-                      <Grid item xs={1} className={classes.playerData}>
-                        {player['height']}
-                      </Grid>
-                      <Grid item xs={1} className={classes.playerData}>
-                        {player['weight']}
-                      </Grid>
-                      <Grid item xs={2} className={classes.playerData}>
-                        {player['dob']}
-                      </Grid>
-                      <Grid item xs={2} className={classes.playerData}>
-                        {player['college']}
-                      </Grid>
-                      <Grid item xs={1} className={classes.playerData}>
-                        <button value={player['player_id']} onClick={handleRemovePlayer}>Drop</button>
-                      </Grid>
-                      <Grid item xs={1}>
-
-                      </Grid>
                     </Grid>
-                  )
-                }) : null}
-              </Grid>
-            </Grid>
+                    <Grid item xs={1}>
 
-          </Grid>
-        </Container>
-      </div>
+                    </Grid>
+                  </Grid>
+                  <Grid className={classes.playerInfoContainer}>
+                    {playerArr ? playerArr.map(player => {
+                      return (
+                        <Grid container item>
+                          <Grid item xs={2} className={classes.playerDataName}>
+                            {player['full_name']}
+                          </Grid>
+                          <Grid item xs={1} className={classes.playerData}>
+                            {player['nfl_team']}
+                          </Grid>
+                          <Grid item xs={1} className={classes.playerData}>
+                            {player['position']}
+                          </Grid>
+                          <Grid item xs={1} className={classes.playerData}>
+                            {player['height']}
+                          </Grid>
+                          <Grid item xs={1} className={classes.playerData}>
+                            {player['weight']}
+                          </Grid>
+                          <Grid item xs={2} className={classes.playerData}>
+                            {player['dob']}
+                          </Grid>
+                          <Grid item xs={2} className={classes.playerData}>
+                            {player['college']}
+                          </Grid>
+                          <Grid item xs={1} className={classes.playerData}>
+                            <button value={player['player_id']} onClick={handleRemovePlayer}>Drop</button>
+                          </Grid>
+                          <Grid item xs={1}>
+
+                          </Grid>
+                        </Grid>
+                      )
+                    }) : null}
+                  </Grid>
+                </Grid>
+
+              </Grid>
+            </Container>
+          </div>
+        </>
+      : <Redirect to='/' />
+      }
     </>
   )
 }

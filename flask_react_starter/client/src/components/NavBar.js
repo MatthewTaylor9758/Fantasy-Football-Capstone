@@ -46,7 +46,7 @@ function NavBar() {
             <Grid item xs={3} className={classes.leftSide}>
               {localStorage.getItem('user') ?
                 <div>
-                  <NavLink to='/myTeam/:id' id='links' className={classes.sideLinks}>My team</NavLink>
+                  <NavLink to={`/myTeam/${user.id}`} id='links' className={classes.sideLinks}>My team</NavLink>
                   <NavLink to='/players' id='links' className={classes.sideLinks}>Available Players</NavLink>
                 </div>
               : null}
