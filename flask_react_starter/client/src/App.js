@@ -37,8 +37,12 @@ function App() {
                 <Route exact path="/users" component={UserList}></Route>
                 <Route exact path='/login' component={LoginPage}></Route>
                 <Route exact path='/signup' component={SignupPage}></Route>
-                <Route exact path='/myTeam/:id' component={MyTeamPage}></Route>
-                <Route exact path='/players' component={AvailPlayers}></Route>
+                { user &&
+                    <Route exact path='/myTeam/:id' component={MyTeamPage}></Route>
+                }
+                { user &&
+                    <Route exact path='/players' component={AvailPlayers}></Route>
+                }
                 <Route path="/" component={SplashPage}></Route>
             </Switch>
         </BrowserRouter>

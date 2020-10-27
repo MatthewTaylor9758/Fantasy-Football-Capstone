@@ -7,8 +7,9 @@ ffsplayers_routes = Blueprint('ffsplayers', __name__)
 def get_ffsplayer():
   data = request.json
   ffsplayer = FFSplayer.query.filter(FFSplayer.id == data['id'])
-  ffsplayer_dict = ffsplayer.to_dict()
-  return {'ffsplayer': ffsplayer_dict}
+  if ffsplayer:
+    ffsplayer_dict = ffsplayer.to_dict()
+    return {'ffsplayer': ffsplayer_dict}
 
 @ffsplayers_routes.route('/', methods=['POST'])
 def create_ffsplayer():
@@ -45,7 +46,9 @@ def get_team_ffsplayers(leagueId, teamId):
 
 @ffsplayers_routes.route('/<ffsplayerId>', methods=['DELETE'])
 def remove_ffsplayer(ffsplayerId):
-  ffsplayer = FFSplayer.query.get(ffsplayerId)
+  print(ffsplayerId)
+  ffsplayer = FFSplayer.query.filter(FFSplayer.player_id == ffsplayerId).first()
+  print(ffsplayer)
   db.session.delete(ffsplayer)
   db.session.commit()
-  return 'ffsplayer removed'
+  return {'message': 'ffsplayer removed'}

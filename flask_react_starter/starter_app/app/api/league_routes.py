@@ -7,8 +7,9 @@ league_routes = Blueprint('leagues', __name__)
 def get_league(leagueId):
   data = request.json
   league = League.query.filter(League.id == leagueId).first()
-  league_dict = league.to_dict()
-  return {'league': league_dict}
+  if league:
+    league_dict = league.to_dict()
+    return {'league': league_dict}
 
 @league_routes.route('/', methods=['POST'])
 def create_league():

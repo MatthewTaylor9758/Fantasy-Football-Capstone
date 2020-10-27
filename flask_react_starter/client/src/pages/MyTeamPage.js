@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { getTeam } from '../store/teams';
 import { getLeague } from '../store/leagues';
-import { get_ffsplayer } from '../store/ffsplayers';
+import { get_ffsplayer, remove_ffsplayer } from '../store/ffsplayers';
 import { makeStyles, Container, TextField, Button, Typography, Grid } from '@material-ui/core';
 import NavBar from '../components/NavBar';
 
@@ -64,6 +64,12 @@ function MyTeamPage() {
   const logout = () => {
     localStorage.clear()
     window.location.href = '/login'
+  }
+
+  const handleRemovePlayer = async (e) => {
+    console.log(e.target.value);
+    const res = await dispatch(remove_ffsplayer(e.target.value));
+    handleGetPlayers(team.id, teamLeagueId)
   }
 
   const useStyles = makeStyles((theme) => ({
@@ -160,7 +166,7 @@ function MyTeamPage() {
           <div className={classes.logoutDiv}>
             <Button onClick={logout} className={classes.logoutButton}>Log out</Button>
           </div>
-          <Grid container xs={12} className={classes.stuffContainer}>
+          <Grid container item xs={12} className={classes.stuffContainer}>
             <Grid item xs={2} className={classes.linksContainer}>
               <div className={classes.outsideLinks}>
                 <a href='https://fantasy.nfl.com/' className={classes.helpLinks}>NFL Fantasy</a>
@@ -192,7 +198,10 @@ function MyTeamPage() {
                 <Grid item xs={2} className={classes.gridTitle}>
                   College
                   </Grid>
-                <Grid item xs={2}>
+                <Grid item xs={1} className={classes.gridTitle}>
+
+                </Grid>
+                <Grid item xs={1}>
 
                 </Grid>
               </Grid>
@@ -221,7 +230,10 @@ function MyTeamPage() {
                       <Grid item xs={2} className={classes.playerData}>
                         {player['college']}
                       </Grid>
-                      <Grid item xs={2}>
+                      <Grid item xs={1} className={classes.playerData}>
+                        <button value={player['player_id']} onClick={handleRemovePlayer}>Drop</button>
+                      </Grid>
+                      <Grid item xs={1}>
 
                       </Grid>
                     </Grid>

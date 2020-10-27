@@ -9,8 +9,9 @@ def get_single_team(ownerId):
   # print(data)
   team = Team.query.filter(Team.owner_id == ownerId).first()
   print(team)
-  team_dict = team.to_dict()
-  return {'team': team_dict}
+  if team:
+    team_dict = team.to_dict()
+    return {'team': team_dict}
 
 @team_routes.route('/')
 def get_teams():

@@ -14,6 +14,7 @@ function AvailPlayers() {
   const myLeagueId = useSelector(state => state.leagues.id)
   const ffsplayers = useSelector(state => state.ffsplayers);
   const [players, updatePlayers] = useState([])
+  const [specificPlayers, updateSpecificPlayers] = useState('');
   const csrfToken = Cookies.get('XSRF-TOKEN');
   const handleShowAllPlayers = async (e) => {
     console.log(csrfToken);
@@ -27,6 +28,7 @@ function AvailPlayers() {
   const handleShowSpecificPlayers = async (e) => {
     console.log(e.target.value)
     const res = await fetch(`/api/players/${myLeagueId}/${e.target.value}`);
+    e.persist()
     const data = await res.json();
     console.log(data.players);
     updatePlayers(data.players);
@@ -36,7 +38,10 @@ function AvailPlayers() {
     handleShowAllPlayers()
   }, [])
 
-  useEffect(() => {
+  // let playerSelect = '';
+
+  useEffect((e) => {
+    // console.log(playerSelect)
     handleShowAllPlayers();
   }, [ffsplayers])
 
@@ -47,7 +52,7 @@ function AvailPlayers() {
   const handleAddPlayer = async (e) => {
     console.log(e.target.value, myTeamId, myLeagueId);
     const res = await dispatch(new_ffsplayer(e.target.value, myLeagueId, myTeamId))
-    console.log(res)
+    // console.log(playerSelect)
   }
 
   const useStyles = makeStyles((theme) => ({
