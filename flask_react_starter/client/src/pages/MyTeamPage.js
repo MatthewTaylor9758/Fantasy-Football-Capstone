@@ -50,7 +50,8 @@ function MyTeamPage() {
     // console.log(teamLeagueId);
     // const res2 = await dispatch(getLeague(teamLeagueId));
     // const res3 = await dispatch(get_ffsplayer(team.id, teamLeagueId))
-    console.log(res)
+    console.log(res);
+    console.log(playerArr);
     // console.log(res2)
     // console.log(res3)
     // debugger
@@ -200,6 +201,9 @@ function MyTeamPage() {
         backgroundColor: 'rgba(200, 0, 0, .3)',
         color: 'black'
       }
+    },
+    noPlayers: {
+      marginTop: '.5em'
     }
   }))
 
@@ -259,7 +263,7 @@ function MyTeamPage() {
                     </Grid>
                   </Grid>
                   <Grid className={classes.playerInfoContainer}>
-                    {playerArr ? playerArr.map(player => {
+                    {playerArr.length ? playerArr.map(player => {
                       return (
                         <Grid container item>
                           <Grid item xs={2} className={classes.playerDataName}>
@@ -288,7 +292,9 @@ function MyTeamPage() {
                           </Grid>
                         </Grid>
                       )
-                    }) : null}
+                    }) :
+                    <Typography variant='h5' className={classes.noPlayers}> - You must have a team to have players.</Typography>
+                    }
                   </Grid>
 
                 </Grid>
