@@ -69,7 +69,7 @@ function SignupPage() {
         height: 'fit-content',
         width: 'fit-content',
         padding: '2em',
-        backgroundColor: 'rgba(255, 255, 255, .15)',
+        backgroundColor: 'rgba(255, 255, 255, .6)',
         backdropFilter: '5px',
         borderRadius: '10px',
         padding: '2em 3em'

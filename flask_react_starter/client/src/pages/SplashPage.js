@@ -12,7 +12,7 @@ function SplashPage() {
 
   const useStyles = makeStyles({
     background: {
-      backgroundImage: 'linear-gradient(-45deg, rgba(255, 255, 255, .2), rgba(25, 111, 12, .7))',
+      // backgroundImage: 'linear-gradient(-45deg, rgba(255, 255, 255, .2), rgba(25, 111, 12, .7))',
       width: '100%'
     },
     outerContainerUpper: {
@@ -86,13 +86,16 @@ function SplashPage() {
       textAlign: 'center',
       width: '100%',
       marginBottom: '.7em',
-      // borderBottom: '1px solid darkgray'
+      // borderBottom: '1px solid darkgray',
+      color: 'rgb(245, 245, 245)'
     },
     pText: {
-      fontWeight: '600'
+      fontWeight: '600',
+      color: 'rgb(245, 245, 245)'
     },
     pTitleText: {
-      fontWeight: '700'
+      fontWeight: '700',
+      color: 'rgb(245, 245, 245)'
     },
     gridText: {
       display: 'flex',

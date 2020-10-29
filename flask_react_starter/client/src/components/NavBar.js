@@ -7,6 +7,11 @@ import '../styles/navBar.css';
 function NavBar() {
   const user = useSelector(state => state.auth);
 
+  const logout = () => {
+    localStorage.clear()
+    window.location.href = '/login'
+  }
+
   const useStyles = makeStyles({
     navBar: {
       backgroundImage: 'radial-gradient(rgba(110, 12, 25, .9), rgb(110, 12, 25, .9), rgba(0, 0, 0, .7))',
@@ -33,6 +38,12 @@ function NavBar() {
     },
     logo: {
       fontFamily: 'Roboto'
+    },
+    logoutButton: {
+      padding: '0 .5em',
+      '&:hover': {
+        cursor: 'pointer'
+      }
     }
   })
 
@@ -60,7 +71,11 @@ function NavBar() {
                   <NavLink to='/login' id='links' className={classes.sideLinks}>Login</NavLink>
                   <NavLink to='/signup' id='links' className={classes.sideLinks}>Sign up</NavLink>
                 </div>
-              : null}
+              :
+                <div className={classes.logoutDiv}>
+                  <a onClick={logout} className={classes.logoutButton}>Log out</a>
+                </div>
+              }
             </Grid>
           </Grid>
         </Toolbar>
