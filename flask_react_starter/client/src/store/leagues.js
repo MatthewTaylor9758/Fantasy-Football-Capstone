@@ -26,6 +26,10 @@ export const addLeague = (league) => {
 }
 
 export const getLeague = (leagueId, teamId) => async dispatch => {
+  if (!leagueId) {
+    leagueId = 0
+  }
+
   const res = await fetch(`/api/leagues/${leagueId}`, {
     method: 'PUT',
     headers: {
