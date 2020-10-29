@@ -161,7 +161,7 @@ function LoginPage() {
                 <NavLink to='/signup' className={classes.links}>Don't have an account? Sign up</NavLink>
               </Button>
               <Button component={Link} to='/' className={classes.homeButton}>
-                <p className={classes.links}>Home</p>
+                <p id='homeButton' className={classes.links}>Home</p>
               </Button>
             </div>
           </div>

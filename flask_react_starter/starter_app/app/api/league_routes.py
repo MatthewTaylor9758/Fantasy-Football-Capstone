@@ -10,6 +10,8 @@ def get_league(leagueId):
   if league:
     league_dict = league.to_dict()
     return {'league': league_dict}
+  else:
+    return {'league': {'name': 'No League Yet'}}
 
 @league_routes.route('/', methods=['POST'])
 def create_league():
