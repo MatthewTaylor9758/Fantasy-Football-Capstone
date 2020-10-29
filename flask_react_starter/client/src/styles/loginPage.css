@@ -27,12 +27,8 @@ img {
   position: absolute;
   display: block;
   list-style: none;
-  /* width: 80px;
-  height: 35px; */
-  /* background:rgba(110, 12, 25, .4); */
   animation: animate 5s linear infinite;
   top: -140px;
-  /* border-radius: 100%/100%; */
 }
 .footballs div:nth-child(1) {
   position: absolute;
@@ -68,3 +64,8 @@ img {
       opacity: 0;
   }
 } */
+
+p {
+  width: 100%;
+  text-align: center;
+}
