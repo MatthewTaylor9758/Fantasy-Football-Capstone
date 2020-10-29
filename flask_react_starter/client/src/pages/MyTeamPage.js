@@ -6,12 +6,14 @@ import { getLeague } from '../store/leagues';
 import { get_ffsplayer, remove_ffsplayer } from '../store/ffsplayers';
 import { makeStyles, Container, TextField, Button, Typography, Grid } from '@material-ui/core';
 import NavBar from '../components/NavBar';
-
+import '../styles/teamPage.css';
 
 function MyTeamPage() {
   const dispatch = useDispatch();
   const user = useSelector(state => state.auth);
   const team = useSelector(state => state.teams);
+  const leagueName = useSelector(state => state.leagues.name);
+  const teamName = useSelector(state => state.teams.name);
   // let team_ffsplayers = JSON.parse(localStorage.getItem('ffsplayers'));
   // const [teamFfsplayersObj, setTeamFfsplayersObj] = useState(team_ffsplayers ? team_ffsplayers : {})
   const ffsplayers = useSelector(state => state.ffsplayers)
@@ -25,7 +27,7 @@ function MyTeamPage() {
 
 
   const handleGetPlayers = async (e) => {
-    const res = await dispatch(get_ffsplayer(team.id, teamLeagueId))
+    const res = await dispatch(get_ffsplayer(teamLeagueId, team.id))
     console.log(res);
   }
 
@@ -65,14 +67,12 @@ function MyTeamPage() {
   //   console.log(Object.values(...Object.values(ffsplayers)))
   // }
 
-  const logout = () => {
-    localStorage.clear()
-    window.location.href = '/login'
-  }
+
 
   const handleRemovePlayer = async (e) => {
     console.log(e.target.value);
     const res = await dispatch(remove_ffsplayer(e.target.value));
+    debugger
     handleGetPlayers(team.id, teamLeagueId)
   }
 
@@ -90,8 +90,8 @@ function MyTeamPage() {
       height: '100%'
     },
     outsideContainer: {
-      background: 'linear-gradient(-45deg, rgba(255, 255, 255, .2), rgba(25, 111, 12, .7))',
-      height: '100vh'
+      // background: 'linear-gradient(-45deg, rgba(255, 255, 255, .2), rgba(25, 111, 12, .7))',
+      height: '100%'
     },
     infoContainer: {
       position: 'absolute',
@@ -99,9 +99,13 @@ function MyTeamPage() {
       minWidth: 'fit-content',
     },
     playerInfo: {
+      display: 'flex',
+      justifyContent: 'center',
       height: 'fit-content',
       minWidth: 'fit-content',
       marginLeft: '5em',
+      // overflowY: 'scroll'
+      // backgroundColor: 'rgba(255, 255, 255, .55)',
     },
     logoutDiv: {
       width: '100%',
@@ -128,16 +132,21 @@ function MyTeamPage() {
       paddingLeft: '0',
       paddingTop: '.5em',
       width: '100%',
+      overflowY: 'overlay'
     },
     playerItem: {
       display: 'flex',
       justifyContent: 'center'
     },
     linksContainer: {
-      height: '100%'
+      height: '100%',
+      // backgroundColor: 'rgba(255, 255, 255, .55)',
     },
     stuffContainer: {
-      height: '100%'
+      height: '100%',
+      backgroundColor: 'rgba(255, 255, 255, .6)',
+      padding: '1em',
+      borderRadius: '10px'
     },
     helpLinks: {
       marginTop: '.5em',
@@ -147,11 +156,50 @@ function MyTeamPage() {
       display: 'flex',
       justifyContent: 'center',
       border: '1px solid black',
-      padding: '.2em 0'
+      padding: '.2em 0',
+      backgroundColor: 'rgba(255, 255, 255, .5)',
+      height: '2.5em',
+      display: 'flex',
+      alignItems: 'center'
     },
     playerDataName: {
       border: '1px solid black',
-      padding: '.2em 0'
+      padding: '0 0 0 .2em',
+      backgroundColor: 'rgba(255, 255, 255, .5)',
+      height: '2.5em',
+      display: 'flex',
+      alignItems: 'center'
+    },
+    teamInfoContainer: {
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center'
+    },
+    leagueAndTeam: {
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginBottom: '1.5em',
+      border: '2px solid black'
+    },
+    leagueAndTeamInfo: {
+      padding: '.2em'
+    },
+    dropButton: {
+      border: '1px solid rgb(200, 0, 78)',
+      borderRadius: '4px',
+      padding: '.3em',
+      fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
+      fontWeight: '500',
+      color: 'rgb(200, 0, 78)',
+      backgroundColor: 'transparent',
+      textTransform: 'uppercase',
+      '&:hover': {
+        backgroundColor: 'rgba(200, 0, 0, .3)',
+        color: 'black'
+      }
     }
   }))
 
@@ -160,7 +208,7 @@ function MyTeamPage() {
   return (
     <>
       {user ?
-        <>
+        <div id='bodyDiv'>
           <NavBar />
           <div className={classes.outsideContainer}>
             <Container className={classes.infoContainer}>
@@ -169,10 +217,11 @@ function MyTeamPage() {
               <Button onClick={handleJoinLeague}>Join League</Button>
               <Button onClick={handleGetTeam}>Get Team</Button> */}
               {/* <Button onClick={testing}>Test</Button> */}
-              <div className={classes.logoutDiv}>
-                <Button onClick={logout} className={classes.logoutButton}>Log out</Button>
-              </div>
               <Grid container item xs={12} className={classes.stuffContainer}>
+                <Container className={classes.leagueAndTeam}>
+                  <Typography variant='h4' className={classes.leagueAndTeamInfo}>League: {leagueName}</Typography>
+                  <Typography variant='h4' className={classes.leagueAndTeamInfo}>Team: {teamName}</Typography>
+                </Container>
                 <Grid item xs={2} className={classes.linksContainer}>
                   <div className={classes.outsideLinks}>
                     <a href='https://fantasy.nfl.com/' className={classes.helpLinks}>NFL Fantasy</a>
@@ -182,32 +231,30 @@ function MyTeamPage() {
                   </div>
                 </Grid>
                 <Grid container item xs={9} className={classes.playerInfo}>
+
                   <Grid container item>
                     <Grid item xs={2} className={classes.gridTitleName}>
                       Name
-                      </Grid>
+                          </Grid>
                     <Grid item xs={1} className={classes.gridTitle}>
                       Team
-                      </Grid>
+                          </Grid>
                     <Grid item xs={1} className={classes.gridTitle}>
                       Position
-                      </Grid>
+                          </Grid>
                     <Grid item xs={1} className={classes.gridTitle}>
                       Height
-                      </Grid>
+                          </Grid>
                     <Grid item xs={1} className={classes.gridTitle}>
                       Weight
-                      </Grid>
+                          </Grid>
                     <Grid item xs={2} className={classes.gridTitle}>
                       DOB
-                      </Grid>
+                          </Grid>
                     <Grid item xs={2} className={classes.gridTitle}>
                       College
-                      </Grid>
+                          </Grid>
                     <Grid item xs={1} className={classes.gridTitle}>
-
-                    </Grid>
-                    <Grid item xs={1}>
 
                     </Grid>
                   </Grid>
@@ -237,23 +284,20 @@ function MyTeamPage() {
                             {player['college']}
                           </Grid>
                           <Grid item xs={1} className={classes.playerData}>
-                            <button value={player['player_id']} onClick={handleRemovePlayer}>Drop</button>
-                          </Grid>
-                          <Grid item xs={1}>
-
+                            <button className={classes.dropButton} value={player['player_id']} onClick={handleRemovePlayer}>Drop</button>
                           </Grid>
                         </Grid>
                       )
                     }) : null}
                   </Grid>
+
                 </Grid>
 
               </Grid>
             </Container>
           </div>
-        </>
-      : <Redirect to='/' />
-      }
+        </div>
+      : <Redirect to='/' />}
     </>
   )
 }

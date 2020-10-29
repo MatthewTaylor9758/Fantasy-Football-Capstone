@@ -60,7 +60,7 @@ function LoginPage() {
         height: 'fit-content',
         width: '100%',
         padding: '2em 0',
-        backgroundColor: 'rgba(255, 255, 255, .15)',
+        backgroundColor: 'rgba(255, 255, 255, .6)',
         backdropFilter: '5px',
         borderRadius: '10px'
       }
@@ -103,7 +103,7 @@ function LoginPage() {
       }
     },
     signupButton: {
-      backgroundColor: 'rgba(255, 255, 255, .15)',
+      backgroundColor: 'rgba(255, 255, 255, .6)',
       marginTop: '1em',
       borderRadius: '10px',
       padding: '0',
@@ -112,7 +112,7 @@ function LoginPage() {
       }
     },
     homeButton: {
-      backgroundColor: 'rgba(255, 255, 255, .15)',
+      backgroundColor: 'rgba(255, 255, 255, .6)',
       marginTop: '1em',
       borderRadius: '10px',
       padding: '0',

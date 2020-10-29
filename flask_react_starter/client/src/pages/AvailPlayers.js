@@ -58,7 +58,7 @@ function AvailPlayers() {
   const useStyles = makeStyles((theme) => ({
     playerInfo: {
       position: 'relative',
-      background: 'linear-gradient(-45deg, rgba(255, 255, 255, .2), rgba(25, 111, 12, .7))',
+      // background: 'linear-gradient(-45deg, rgba(255, 255, 255, .2), rgba(25, 111, 12, .7))',
     },
     playersContainer: {
       width: '85%',
@@ -66,7 +66,7 @@ function AvailPlayers() {
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: 'rgba(255, 255, 255, .35)',
+      backgroundColor: 'rgba(255, 255, 255, .6)',
       paddingTop: '1em',
       borderRadius: '3px'
     },
@@ -80,7 +80,8 @@ function AvailPlayers() {
       display: 'flex',
       justifyContent: 'center',
       padding: '.2em 0',
-      border: '1px solid black'
+      border: '1px solid black',
+      height: '3em'
     },
     gridTitle: {
       display: 'flex',
@@ -96,11 +97,13 @@ function AvailPlayers() {
     playerTitle: {
       display: 'flex',
       justifyContent: 'center',
-      alignItems: 'center'
+      alignItems: 'center',
+      fontWeight: '450'
     },
     playerTitleName: {
       display: 'flex',
-      alignItems: 'center'
+      alignItems: 'center',
+      fontWeight: '450'
     },
     secondBar: {
       display: 'flex',
@@ -114,10 +117,12 @@ function AvailPlayers() {
     myTeamContainer: {
       display: 'flex',
       flexDirection: 'column',
-      backgroundColor: 'rgba(255, 255, 255, .35)',
+      backgroundColor: 'rgba(255, 255, 255, .6)',
       paddingTop: '1em',
       paddingBottom: '1em',
-      borderRadius: '3px'
+      borderRadius: '3px',
+      marginRight: '5px',
+
     },
     leftGrid: {
       position: 'sticky',
@@ -153,15 +158,44 @@ function AvailPlayers() {
     },
     myTeamTitle: {
       display: 'flex',
-      justifyContent: 'center'
+      justifyContent: 'center',
     },
     positionSelector: {
       display: 'flex',
       justifyContent: 'center',
       marginBottom: '.8em',
-      background: 'rgba(255, 255, 255, .5)',
-      padding: '.2em 0',
+      background: 'rgba(255, 255, 255, .3)',
+      padding: '.5em 1em',
       borderRadius: '8px'
+    },
+    addButton: {
+      border: '1px solid rgb(0, 0, 200)',
+      borderRadius: '4px',
+      padding: '.3em',
+      fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
+      fontWeight: '500',
+      color: 'rgb(0, 0, 200)',
+      backgroundColor: 'transparent',
+      textTransform: 'uppercase',
+      '&:hover': {
+        backgroundColor: 'rgba(0, 0, 200, .3)',
+        color: 'white'
+      }
+    },
+    positionButton: {
+      border: '1px solid rgb(0, 0, 0)',
+      borderRadius: '4px',
+      padding: '.3em',
+      margin: '0 .7em',
+      fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
+      fontWeight: '500',
+      color: 'rgb(0, 0, 0)',
+      backgroundColor: 'transparent',
+      textTransform: 'uppercase',
+      '&:hover': {
+        backgroundColor: 'rgba(0, 0, 0, .3)',
+        color: 'white'
+      }
     }
   }))
 
@@ -236,22 +270,22 @@ function AvailPlayers() {
             {players.length ?
               <Container className={classes.playersContainer}>
                 <div className={classes.positionSelector}>
-                  <button value='QB' onClick={handleShowSpecificPlayers}>
+                  <button value='QB' className={classes.positionButton} onClick={handleShowSpecificPlayers}>
                     QB
                   </button>
-                  <button value='RB' onClick={handleShowSpecificPlayers}>
+                  <button value='RB' className={classes.positionButton} onClick={handleShowSpecificPlayers}>
                     RB
                   </button>
-                  <button value='WR' onClick={handleShowSpecificPlayers}>
+                  <button value='WR' className={classes.positionButton} onClick={handleShowSpecificPlayers}>
                     WR
                   </button>
-                  <button value='TE' onClick={handleShowSpecificPlayers}>
+                  <button value='TE' className={classes.positionButton} onClick={handleShowSpecificPlayers}>
                     TE
                   </button>
-                  <button value='K' onClick={handleShowSpecificPlayers}>
+                  <button value='K' className={classes.positionButton} onClick={handleShowSpecificPlayers}>
                     K
                   </button>
-                  <button value='DEF' onClick={handleShowSpecificPlayers}>
+                  <button value='DEF' className={classes.positionButton} onClick={handleShowSpecificPlayers}>
                     DEF
                   </button>
                 </div>
@@ -279,8 +313,8 @@ function AvailPlayers() {
                       <Grid item xs={2} className={classes.playerTitleName}>
                         {player['college']}
                       </Grid>
-                      <Grid item xs={1}>
-                        <button value={player['player_id']} onClick={handleAddPlayer}>Add</button>
+                      <Grid item xs={1} className={classes.playerTitle}>
+                        <button className={classes.addButton} value={player['player_id']} onClick={handleAddPlayer}>Add</button>
                       </Grid>
                     </Grid>
                   )
