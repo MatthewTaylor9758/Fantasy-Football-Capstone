@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { login } from '../store/auth'
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { makeStyles, Container, TextField, Button, Card, Typography } from '@material-ui/core';
 import NavBar from '../components/NavBar';
 import { getTeam } from '../store/teams';
@@ -78,6 +78,7 @@ function LoginPage() {
       fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
       padding: '.7em',
       zIndex: '10',
+      margin: '0',
       '&:hover': {
         color: 'white'
       }
@@ -116,6 +117,10 @@ function LoginPage() {
       marginTop: '1em',
       borderRadius: '10px',
       padding: '0',
+      width: '100%',
+      '&:hover': {
+        backgroundColor: 'rgba(200, 200, 255, .8)'
+      }
     }
   }));
 
@@ -155,8 +160,8 @@ function LoginPage() {
               <Button className={classes.signupButton}>
                 <NavLink to='/signup' className={classes.links}>Don't have an account? Sign up</NavLink>
               </Button>
-              <Button className={classes.homeButton}>
-                <NavLink to='/' className={classes.links}>Home</NavLink>
+              <Button component={Link} to='/' className={classes.homeButton}>
+                <p id='homeButton' className={classes.links}>Home</p>
               </Button>
             </div>
           </div>

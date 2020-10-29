@@ -12,6 +12,8 @@ def get_single_team(ownerId):
   if team:
     team_dict = team.to_dict()
     return {'team': team_dict}
+  else:
+    return {'team': {'name': 'No Team Yet'}}
 
 @team_routes.route('/')
 def get_teams():
