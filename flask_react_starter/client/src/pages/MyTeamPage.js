@@ -43,6 +43,7 @@ function MyTeamPage() {
 
   const handleGetTeam = async (e) => {
     console.log(userId)
+    // debugger
     const res = await dispatch(getTeam(userId))
     // console.log(res)
     // await setUserTeam(res['team'])
@@ -61,6 +62,7 @@ function MyTeamPage() {
   useEffect(() => {
     // console.log(team_ffsplayers)
     handleGetTeam();
+    console.log(playerArr)
   }, [])
 
   // const testing = () => {
@@ -73,7 +75,6 @@ function MyTeamPage() {
   const handleRemovePlayer = async (e) => {
     console.log(e.target.value);
     const res = await dispatch(remove_ffsplayer(e.target.value));
-    debugger
     handleGetPlayers(team.id, teamLeagueId)
   }
 

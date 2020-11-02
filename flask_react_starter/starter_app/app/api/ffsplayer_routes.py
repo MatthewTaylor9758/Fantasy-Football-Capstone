@@ -46,9 +46,15 @@ def get_team_ffsplayers(leagueId, teamId):
 
 @ffsplayers_routes.route('/<ffsplayerId>', methods=['DELETE'])
 def remove_ffsplayer(ffsplayerId):
-  print(ffsplayerId)
+  print('**********************', ffsplayerId)
   ffsplayer = FFSplayer.query.filter(FFSplayer.player_id == ffsplayerId).first()
-  print(ffsplayer)
+  print('$$$$$$$$$$$$$$$$$$$$$$', ffsplayer)
   db.session.delete(ffsplayer)
   db.session.commit()
   return {'message': 'ffsplayer removed'}
+
+
+  # to fix the deleting thing that deletes the first ffsplayer with the playerId
+  # that it finds, just make sure to add into the route variables the league_id and
+  # team_id. Then you can use the "and" functionality with the comma to get only the
+  # ffsplayer with that playerId from that specific league and that specific team.
