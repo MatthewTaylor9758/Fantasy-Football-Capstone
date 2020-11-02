@@ -37,7 +37,6 @@ function LoginPage() {
         console.log(res['1'])
         setErrors(Object.values(res['1']));
       } else {
-        debugger
         await dispatch(getTeam(res.user.id))
         window.location.href = `./myTeam/${res.user.id}`
       }
