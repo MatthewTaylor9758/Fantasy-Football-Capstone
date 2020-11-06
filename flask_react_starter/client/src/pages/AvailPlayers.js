@@ -206,7 +206,7 @@ function AvailPlayers() {
       alignItems: 'center',
       minHeight: 'calc(100vh - 64px)',
       minWidth: '100vw',
-      backgroundColor: 'rgba(255, 255, 255, .3)'
+      // backgroundColor: 'rgba(255, 255, 255, .3)',
     }
   }))
 
@@ -339,7 +339,7 @@ function AvailPlayers() {
       </Container>
       </>
       :
-      <div className={classes.noLeagueDiv}>
+      <div id='noLeagueDiv' className={classes.noLeagueDiv}>
         <Typography variant='h3'>You must join a league to have available players.</Typography>
       </div>
       }

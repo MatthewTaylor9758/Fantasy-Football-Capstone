@@ -5,3 +5,12 @@
   padding: 5px 24px 5px 24px;
   max-height: 31px;
 }
+
+#noLeagueDiv {
+  transition: background-color 1s ease;
+  background-color: rgba(255, 255, 255, .2);
+}
+
+#noLeagueDiv:hover {
+  background-color: rgba(255, 255, 255, .4);
+}
