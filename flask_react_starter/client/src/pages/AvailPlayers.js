@@ -19,11 +19,13 @@ function AvailPlayers() {
   const handleShowAllPlayers = async (e) => {
     console.log(csrfToken);
     console.log(myLeagueId);
-    const res = await fetch(`/api/players/${myLeagueId}`);
-    const data = await res.json();
-    console.log(data.players);
-    updatePlayers(data.players);
-    players.length ? console.log(true) : console.log(false)
+    if (myLeagueId) {
+      const res = await fetch(`/api/players/${myLeagueId}`);
+      const data = await res.json();
+      console.log(data.players);
+      updatePlayers(data.players);
+      players.length ? console.log(true) : console.log(false)
+    }
   }
 
   const handleShowSpecificPlayers = async (e) => {
@@ -197,6 +199,14 @@ function AvailPlayers() {
         backgroundColor: 'rgba(0, 0, 0, .3)',
         color: 'white'
       }
+    },
+    noLeagueDiv: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      minHeight: 'calc(100vh - 64px)',
+      minWidth: '100vw',
+      backgroundColor: 'rgba(255, 255, 255, .3)'
     }
   }))
 
@@ -205,7 +215,8 @@ function AvailPlayers() {
   return (
     <>
       <NavBar />
-
+      {myLeagueId ?
+      <>
       <AppBar id='secondBar'>
           <Grid container item className={classes.secondBar}>
             <Grid item xs={2}>
@@ -326,6 +337,12 @@ function AvailPlayers() {
           </Grid>
         </Grid>
       </Container>
+      </>
+      :
+      <div className={classes.noLeagueDiv}>
+        <Typography variant='h3'>You must join a league to have available players.</Typography>
+      </div>
+      }
     </>
   )
 }
