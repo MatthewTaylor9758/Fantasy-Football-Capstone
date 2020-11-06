@@ -18,6 +18,7 @@ function AvailPlayers() {
   const csrfToken = Cookies.get('XSRF-TOKEN');
   const handleShowAllPlayers = async (e) => {
     console.log(csrfToken);
+    console.log(myLeagueId);
     const res = await fetch(`/api/players/${myLeagueId}`);
     const data = await res.json();
     console.log(data.players);
