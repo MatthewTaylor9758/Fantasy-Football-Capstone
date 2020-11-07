@@ -1,0 +1,12 @@
+  to fix the deleting thing that deletes the first ffsplayer with the playerId
+  that it finds, just make sure to add into the route variables the league_id and
+  team_id. Then you can use the "and" functionality with the comma to get only the
+  ffsplayer with that playerId from that specific league and that specific team.
+
+  to get only 50 players at a time for the available players page try using "limit"
+  and "offset" for the queries. Use the "e.target.value" * 50 for the offset, which
+  will be the page number the user clicked on. Then maybe use the division of how
+  many players come back in the total query, and create the pages divs based on that
+  total number divided by 50
+
+  Have to add a footer that will show up on ALL pages with my contact info.
