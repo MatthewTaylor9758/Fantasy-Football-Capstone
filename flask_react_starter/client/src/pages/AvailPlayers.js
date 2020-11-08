@@ -235,11 +235,21 @@ function AvailPlayers() {
       height: '100vh'
     },
     playerInfoModal: {
+      display: 'flex',
+      flexDirection: 'column',
       width: '65%',
       height: '75%',
       backgroundColor: 'rgba(255, 255, 255, .9)',
       color: 'black',
       margin: '0'
+    },
+    modalHeader: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center'
+    },
+    modalExitButton: {
+      height: 'fit-content',
     }
   }))
 
@@ -377,7 +387,11 @@ function AvailPlayers() {
                 >
                   <div className={classes.modalContainer}>
                     <div className={classes.playerInfoModal}>
-                      This is just a test for the modal. {player}
+                      <div className={classes.modalHeader}>
+                        <Typography variant='h4'>{player}</Typography>
+                        <button className={classes.modalExitButton} onClick={handleClose}>X</button>
+                      </div>
+                      This is just a test for the modal.
                     </div>
                   </div>
                 </Modal>
