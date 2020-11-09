@@ -7,6 +7,7 @@ import { get_ffsplayer, remove_ffsplayer } from '../store/ffsplayers';
 import { makeStyles, Container, TextField, Button, Typography, Grid } from '@material-ui/core';
 import NavBar from '../components/NavBar';
 import '../styles/teamPage.css';
+import Footer from '../components/Footer';
 
 function MyTeamPage() {
   const dispatch = useDispatch();

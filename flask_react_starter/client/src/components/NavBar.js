@@ -1,16 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { makeStyles, Container, TextField, Button, Typography, AppBar, Toolbar, Grid } from '@material-ui/core';
+import { makeStyles, Container, TextField, Button, Typography, AppBar, Toolbar, Grid, Modal } from '@material-ui/core';
 import '../styles/navBar.css';
 
 function NavBar() {
   const user = useSelector(state => state.auth);
+  const [open, setOpen] = useState(false);
 
   const logout = () => {
     localStorage.clear()
     window.location.href = '/login'
   }
+
+  const handleOpen = (e) => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const useStyles = makeStyles({
     navBar: {
@@ -44,7 +53,16 @@ function NavBar() {
       '&:hover': {
         cursor: 'pointer'
       }
-    }
+    },
+    myInfoModal: {
+      display: 'flex',
+      flexDirection: 'column',
+      width: '65%',
+      height: '75%',
+      backgroundColor: 'rgba(255, 255, 255, .9)',
+      color: 'black',
+      margin: '0'
+    },
   })
 
   const classes = useStyles();
@@ -60,10 +78,10 @@ function NavBar() {
                   <NavLink to={`/myTeam/${user.id}`} id='links' className={classes.sideLinks}>My team</NavLink>
                   <NavLink to='/players' id='links' className={classes.sideLinks}>Available Players</NavLink>
                 </div>
-              : null}
+                : null}
             </Grid>
             <Grid item xs={6} className={classes.middle}>
-              <NavLink to="/" activeclass="active" id='links'className={classes.logo}>FFStockpile</NavLink>
+              <NavLink to="/" activeclass="active" id='links' className={classes.logo}>FFStockpile</NavLink>
             </Grid>
             <Grid item xs={3} className={classes.rightSide}>
               {!localStorage.getItem('user') ?
@@ -71,7 +89,7 @@ function NavBar() {
                   <NavLink to='/login' id='links' className={classes.sideLinks}>Login</NavLink>
                   <NavLink to='/signup' id='links' className={classes.sideLinks}>Sign up</NavLink>
                 </div>
-              :
+                :
                 <div className={classes.logoutDiv}>
                   <a onClick={logout} className={classes.logoutButton}>Log out</a>
                 </div>
@@ -80,6 +98,16 @@ function NavBar() {
           </Grid>
         </Toolbar>
       </AppBar>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+      >
+        <div className={classes.myInfoModal}>
+            This is just a test for the modal.
+        </div>
+      </Modal>
     </>
   )
 }

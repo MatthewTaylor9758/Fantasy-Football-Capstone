@@ -6,6 +6,7 @@ import NavBar from '../components/NavBar';
 import stats_picture from '../images/stats_picture.png';
 import data_image from '../images/data_image.jpg';
 import players_background from '../images/players_background.jpg';
+import Footer from '../components/Footer';
 
 function SplashPage() {
   const user = useSelector(state => state.auth)
