@@ -60,7 +60,9 @@ function NavBar() {
       display: 'flex',
       flexDirection: 'column',
       width: '50%',
+      minWidth: 'fit-content',
       height: '50%',
+      minHeight: 'fit-content',
       transform: 'translate(50%, 50%)',
       background: '#2c3531',
       color: 'black',
@@ -84,8 +86,31 @@ function NavBar() {
       border: 'none'
     },
     contactLinks: {
+      color: '#d1e8e2',
+      margin: '.7em 0'
+    },
+    developerLinks: {
+      display: 'flex',
+      flexDirection: 'column',
+      border: '1px solid #d9b08c',
+      margin: '1em',
+      padding: '1em',
+      height: '50%'
+
+    },
+    fieldTitle: {
       color: '#d1e8e2'
-    }
+    },
+    githubLink: {
+      margin: '.7em 1em'
+    },
+    linkedinLink: {
+      margin: '.7em 1em'
+    },
+    portfolioLink: {
+      margin: '.7em 1em'
+
+    },
   })
 
   const classes = useStyles();
@@ -136,15 +161,18 @@ function NavBar() {
           <div className={classes.modalTitle}>
             <Typography variant='h4'>Matt Taylor</Typography>
           </div>
-          <div className={classes.githubLink}>
-            <a href='https://github.com/MatthewTaylor9758' className={classes.contactLinks} target='_blank'>GitHub</a>
-          </div>
-          <div className={classes.linkedinLink}>
-            <a href='https://www.linkedin.com/in/matthew-taylor-3763ba1b8/' className={classes.contactLinks} target='_blank'>LinkedIn</a>
-          </div>
-          <div className={classes.portfolioLink}>
-            <a href='https://matthewtaylor9758.github.io/' className={classes.contactLinks} target='_blank'>Portfolio Site</a>
-          </div>
+          <fieldset className={classes.developerLinks}>
+            <legend className={classes.fieldTitle}>Developer Contact Links</legend>
+            <div className={classes.githubLink}>
+              <a href='https://github.com/MatthewTaylor9758' className={classes.contactLinks} target='_blank'>GitHub</a>
+            </div>
+            <div className={classes.linkedinLink}>
+              <a href='https://www.linkedin.com/in/matthew-taylor-3763ba1b8/' className={classes.contactLinks} target='_blank'>LinkedIn</a>
+            </div>
+            <div className={classes.portfolioLink}>
+              <a href='https://matthewtaylor9758.github.io/' className={classes.contactLinks} target='_blank'>Portfolio Site</a>
+            </div>
+          </fieldset>
         </Card>
       </Modal>
     </>
