@@ -30,12 +30,13 @@ function NavBar() {
     },
     leftSide: {
       display: 'flex',
-      padding: '0 2em',
+      // padding: '0 2em',
       justifyContent: 'flex-start',
     },
     middle: {
       display: 'flex',
       justifyContent: 'center',
+      alignItems: 'center'
     },
     rightSide: {
       display: 'flex',
@@ -46,7 +47,8 @@ function NavBar() {
       padding: '0 .5em'
     },
     logo: {
-      fontFamily: 'Roboto'
+      fontFamily: 'Roboto',
+
     },
     logoutButton: {
       padding: '0 .5em',
@@ -57,12 +59,23 @@ function NavBar() {
     myInfoModal: {
       display: 'flex',
       flexDirection: 'column',
-      width: '65%',
-      height: '75%',
+      width: '50%',
+      height: '50%',
+      transform: 'translate(50%, 50%)',
       backgroundColor: 'rgba(255, 255, 255, .9)',
       color: 'black',
       margin: '0'
     },
+    loggedInLinks: {
+      display: 'flex',
+    },
+    linkDiv: {
+      display: 'flex',
+      alignItems: 'center'
+    },
+    contactButton: {
+      color: 'white'
+    }
   })
 
   const classes = useStyles();
@@ -72,25 +85,30 @@ function NavBar() {
       <AppBar position='sticky' className={classes.navBar}>
         <Toolbar>
           <Grid container xs={12}>
-            <Grid item xs={3} className={classes.leftSide}>
+            <Grid item xs={4} className={classes.leftSide}>
+              <Button className={classes.contactButton} onClick={handleOpen}>Contact Info</Button>
               {localStorage.getItem('user') ?
-                <div>
-                  <NavLink to={`/myTeam/${user.id}`} id='links' className={classes.sideLinks}>My team</NavLink>
-                  <NavLink to='/players' id='links' className={classes.sideLinks}>Available Players</NavLink>
+                <div className={classes.loggedInLinks}>
+                  <div className={classes.linkDiv}>
+                    <NavLink to={`/myTeam/${user.id}`} id='links' className={classes.sideLinks}>My team</NavLink>
+                  </div>
+                  <div className={classes.linkDiv}>
+                    <NavLink to='/players' id='links' className={classes.sideLinks}>Available Players</NavLink>
+                  </div>
                 </div>
                 : null}
             </Grid>
-            <Grid item xs={6} className={classes.middle}>
+            <Grid item xs={4} className={classes.middle}>
               <NavLink to="/" activeclass="active" id='links' className={classes.logo}>FFStockpile</NavLink>
             </Grid>
-            <Grid item xs={3} className={classes.rightSide}>
+            <Grid item xs={4} className={classes.rightSide}>
               {!localStorage.getItem('user') ?
-                <div>
+                <div className={classes.linkDiv}>
                   <NavLink to='/login' id='links' className={classes.sideLinks}>Login</NavLink>
                   <NavLink to='/signup' id='links' className={classes.sideLinks}>Sign up</NavLink>
                 </div>
                 :
-                <div className={classes.logoutDiv}>
+                <div className={classes.linkDiv}>
                   <a onClick={logout} className={classes.logoutButton}>Log out</a>
                 </div>
               }
