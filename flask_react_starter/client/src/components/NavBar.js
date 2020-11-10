@@ -1,16 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { makeStyles, Container, TextField, Button, Typography, AppBar, Toolbar, Grid } from '@material-ui/core';
+import { makeStyles, Container, TextField, Button, Typography, AppBar, Toolbar, Grid, Modal } from '@material-ui/core';
 import '../styles/navBar.css';
 
 function NavBar() {
   const user = useSelector(state => state.auth);
+  const [open, setOpen] = useState(false);
 
   const logout = () => {
     localStorage.clear()
     window.location.href = '/login'
   }
+
+  const handleOpen = (e) => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const useStyles = makeStyles({
     navBar: {
@@ -21,12 +30,13 @@ function NavBar() {
     },
     leftSide: {
       display: 'flex',
-      padding: '0 2em',
+      // padding: '0 2em',
       justifyContent: 'flex-start',
     },
     middle: {
       display: 'flex',
       justifyContent: 'center',
+      alignItems: 'center'
     },
     rightSide: {
       display: 'flex',
@@ -37,13 +47,34 @@ function NavBar() {
       padding: '0 .5em'
     },
     logo: {
-      fontFamily: 'Roboto'
+      fontFamily: 'Roboto',
+
     },
     logoutButton: {
       padding: '0 .5em',
       '&:hover': {
         cursor: 'pointer'
       }
+    },
+    myInfoModal: {
+      display: 'flex',
+      flexDirection: 'column',
+      width: '50%',
+      height: '50%',
+      transform: 'translate(50%, 50%)',
+      backgroundColor: 'rgba(255, 255, 255, .9)',
+      color: 'black',
+      margin: '0'
+    },
+    loggedInLinks: {
+      display: 'flex',
+    },
+    linkDiv: {
+      display: 'flex',
+      alignItems: 'center'
+    },
+    contactButton: {
+      color: 'white'
     }
   })
 
@@ -54,25 +85,30 @@ function NavBar() {
       <AppBar position='sticky' className={classes.navBar}>
         <Toolbar>
           <Grid container xs={12}>
-            <Grid item xs={3} className={classes.leftSide}>
+            <Grid item xs={4} className={classes.leftSide}>
+              <Button className={classes.contactButton} onClick={handleOpen}>Contact Info</Button>
               {localStorage.getItem('user') ?
-                <div>
-                  <NavLink to={`/myTeam/${user.id}`} id='links' className={classes.sideLinks}>My team</NavLink>
-                  <NavLink to='/players' id='links' className={classes.sideLinks}>Available Players</NavLink>
+                <div className={classes.loggedInLinks}>
+                  <div className={classes.linkDiv}>
+                    <NavLink to={`/myTeam/${user.id}`} id='links' className={classes.sideLinks}>My team</NavLink>
+                  </div>
+                  <div className={classes.linkDiv}>
+                    <NavLink to='/players' id='links' className={classes.sideLinks}>Available Players</NavLink>
+                  </div>
                 </div>
-              : null}
+                : null}
             </Grid>
-            <Grid item xs={6} className={classes.middle}>
-              <NavLink to="/" activeclass="active" id='links'className={classes.logo}>FFStockpile</NavLink>
+            <Grid item xs={4} className={classes.middle}>
+              <NavLink to="/" activeclass="active" id='links' className={classes.logo}>FFStockpile</NavLink>
             </Grid>
-            <Grid item xs={3} className={classes.rightSide}>
+            <Grid item xs={4} className={classes.rightSide}>
               {!localStorage.getItem('user') ?
-                <div>
+                <div className={classes.linkDiv}>
                   <NavLink to='/login' id='links' className={classes.sideLinks}>Login</NavLink>
                   <NavLink to='/signup' id='links' className={classes.sideLinks}>Sign up</NavLink>
                 </div>
-              :
-                <div className={classes.logoutDiv}>
+                :
+                <div className={classes.linkDiv}>
                   <a onClick={logout} className={classes.logoutButton}>Log out</a>
                 </div>
               }
@@ -80,6 +116,16 @@ function NavBar() {
           </Grid>
         </Toolbar>
       </AppBar>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+      >
+        <div className={classes.myInfoModal}>
+            This is just a test for the modal.
+        </div>
+      </Modal>
     </>
   )
 }
