@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { makeStyles, Container, TextField, Button, Typography, AppBar, Toolbar, Grid, Modal } from '@material-ui/core';
+import { makeStyles, Card, Button, Typography, AppBar, Toolbar, Grid, Modal } from '@material-ui/core';
 import '../styles/navBar.css';
 
 function NavBar() {
@@ -62,9 +62,10 @@ function NavBar() {
       width: '50%',
       height: '50%',
       transform: 'translate(50%, 50%)',
-      backgroundColor: 'rgba(255, 255, 255, .9)',
+      background: '#2c3531',
       color: 'black',
-      margin: '0'
+      margin: '0',
+      outline: 'none'
     },
     loggedInLinks: {
       display: 'flex',
@@ -75,6 +76,15 @@ function NavBar() {
     },
     contactButton: {
       color: 'white'
+    },
+    modalTitle: {
+      background: '#116466',
+      color: 'white',
+      padding: '.5em',
+      border: 'none'
+    },
+    contactLinks: {
+      color: '#d1e8e2'
     }
   })
 
@@ -122,9 +132,20 @@ function NavBar() {
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
       >
-        <div className={classes.myInfoModal}>
-            This is just a test for the modal.
-        </div>
+        <Card className={classes.myInfoModal}>
+          <div className={classes.modalTitle}>
+            <Typography variant='h4'>Matt Taylor</Typography>
+          </div>
+          <div className={classes.githubLink}>
+            <a href='https://github.com/MatthewTaylor9758' className={classes.contactLinks} target='_blank'>GitHub</a>
+          </div>
+          <div className={classes.linkedinLink}>
+            <a href='https://www.linkedin.com/in/matthew-taylor-3763ba1b8/' className={classes.contactLinks} target='_blank'>LinkedIn</a>
+          </div>
+          <div className={classes.portfolioLink}>
+            <a href='https://matthewtaylor9758.github.io/' className={classes.contactLinks} target='_blank'>Portfolio Site</a>
+          </div>
+        </Card>
       </Modal>
     </>
   )
