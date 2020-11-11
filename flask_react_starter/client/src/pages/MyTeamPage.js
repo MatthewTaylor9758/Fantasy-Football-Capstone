@@ -230,10 +230,10 @@ function MyTeamPage() {
                 </Container>
                 <Grid item xs={2} className={classes.linksContainer}>
                   <div className={classes.outsideLinks}>
-                    <a href='https://fantasy.nfl.com/' className={classes.helpLinks}>NFL Fantasy</a>
-                    <a href='https://www.cbssports.com/fantasy/' className={classes.helpLinks}>CBS Fantasy</a>
-                    <a href='https://www.espn.com/fantasy/football/' className={classes.helpLinks}>ESPN Fantasy</a>
-                    <a href='https://football.fantasysports.yahoo.com/' className={classes.helpLinks}>Yahoo Fantasy</a>
+                    <a href='https://fantasy.nfl.com/' target='_blank' className={classes.helpLinks}>NFL Fantasy</a>
+                    <a href='https://www.cbssports.com/fantasy/' target='_blank' className={classes.helpLinks}>CBS Fantasy</a>
+                    <a href='https://www.espn.com/fantasy/football/' target='_blank' className={classes.helpLinks}>ESPN Fantasy</a>
+                    <a href='https://football.fantasysports.yahoo.com/' target='_blank' className={classes.helpLinks}>Yahoo Fantasy</a>
                   </div>
                 </Grid>
                 <Grid container item xs={9} className={classes.playerInfo}>
