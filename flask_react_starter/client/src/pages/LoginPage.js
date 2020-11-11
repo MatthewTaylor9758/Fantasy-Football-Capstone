@@ -24,6 +24,11 @@ function LoginPage() {
     setPassword(e.target.value);
   }
 
+  const handleDemoLogin = async (e) => {
+    const res = await dispatch(login('DemoUser', 'password'))
+    window.location.href = `./myTeam/${res.user.id}`
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!username || !password) {
@@ -120,6 +125,13 @@ function LoginPage() {
       '&:hover': {
         backgroundColor: 'rgba(200, 200, 255, .8)'
       }
+    },
+    demoUserButton: {
+      backgroundColor: 'rgba(255, 255, 255, .6)',
+      marginTop: '1em',
+      borderRadius: '10px',
+      padding: '0',
+      width: '100%',
     }
   }));
 
@@ -158,6 +170,9 @@ function LoginPage() {
             <div style={{display: 'flex', flexDirection: 'column'}}>
               <Button className={classes.signupButton}>
                 <NavLink to='/signup' className={classes.links}>Don't have an account? Sign up</NavLink>
+              </Button>
+              <Button className={classes.homeButton} onClick={handleDemoLogin}>
+                <p id='homeButton' className={classes.links}>Login as Demo User</p>
               </Button>
               <Button component={Link} to='/' className={classes.homeButton}>
                 <p id='homeButton' className={classes.links}>Home</p>

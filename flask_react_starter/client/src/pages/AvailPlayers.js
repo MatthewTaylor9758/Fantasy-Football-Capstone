@@ -224,6 +224,7 @@ function AvailPlayers() {
       background: 'transparent',
       border: 'none',
       outline: 'none',
+      textAlign: 'start',
       '&:hover': {
         cursor: 'pointer'
       }
