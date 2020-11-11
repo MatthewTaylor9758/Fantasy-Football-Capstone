@@ -56,8 +56,9 @@ export const new_ffsplayer = (player_id, league_id, team_id) => async dispatch =
   }
 }
 
-export const remove_ffsplayer = (player_id) => async dispatch => {
-  const res = await fetch(`/api/ffsplayers/${player_id}`, {
+export const remove_ffsplayer = (player_id, league_id) => async dispatch => {
+  console.log(player_id, league_id);
+  const res = await fetch(`/api/ffsplayers/${player_id}/${league_id}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json'

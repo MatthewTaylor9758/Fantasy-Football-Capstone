@@ -75,7 +75,7 @@ function MyTeamPage() {
 
   const handleRemovePlayer = async (e) => {
     console.log(e.target.value);
-    const res = await dispatch(remove_ffsplayer(e.target.value));
+    const res = await dispatch(remove_ffsplayer(e.target.value, teamLeagueId));
     handleGetPlayers(team.id, teamLeagueId)
   }
 
