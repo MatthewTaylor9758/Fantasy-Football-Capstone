@@ -8,7 +8,7 @@ def get_single_team(ownerId):
   # data = request.json
   # print(data)
   team = Team.query.filter(Team.owner_id == ownerId).first()
-  print(team)
+  print('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', team)
   if team:
     team_dict = team.to_dict()
     return {'team': team_dict}
