@@ -44,11 +44,11 @@ def get_team_ffsplayers(leagueId, teamId):
   players_dict = {num: player for num, player in enumerate(team_nfl_players, 1)}
   return players_dict
 
-@ffsplayers_routes.route('/<ffsplayerId>', methods=['DELETE'])
-def remove_ffsplayer(ffsplayerId):
+@ffsplayers_routes.route('/<ffsplayerId>/<leagueId>', methods=['DELETE'])
+def remove_ffsplayer(ffsplayerId, leagueId):
   print('**********************', ffsplayerId)
-  ffsplayer = FFSplayer.query.filter(FFSplayer.player_id == ffsplayerId).first()
-  print('$$$$$$$$$$$$$$$$$$$$$$', ffsplayer)
+  ffsplayer = FFSplayer.query.filter(FFSplayer.player_id == ffsplayerId, FFSplayer.league_id == leagueId).first()
+  print('$$$$$$$$$$$$$$$$$$$$$$', ffsplayer.to_dict())
   db.session.delete(ffsplayer)
   db.session.commit()
   return {'message': 'ffsplayer removed'}

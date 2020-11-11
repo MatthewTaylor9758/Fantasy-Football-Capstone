@@ -87,11 +87,16 @@ function NavBar() {
     },
     contactLinks: {
       color: '#d1e8e2',
-      margin: '.7em 0'
+      margin: '.7em 0',
+      textDecoration: 'none',
+      '&:hover': {
+        fontSize: '1.1em'
+      }
     },
     developerLinks: {
       display: 'flex',
       flexDirection: 'column',
+      // background: 'radial-gradient(#d9b08c, #ffcb9a)',
       border: '1px solid #d9b08c',
       margin: '1em',
       padding: '1em',
