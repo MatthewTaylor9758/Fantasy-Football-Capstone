@@ -132,6 +132,9 @@ function LoginPage() {
       borderRadius: '10px',
       padding: '0',
       width: '100%',
+      '&:hover': {
+        backgroundColor: '#24156f'
+      }
     }
   }));
 
@@ -171,8 +174,8 @@ function LoginPage() {
               <Button className={classes.signupButton}>
                 <NavLink to='/signup' className={classes.links}>Don't have an account? Sign up</NavLink>
               </Button>
-              <Button className={classes.homeButton} onClick={handleDemoLogin}>
-                <p id='homeButton' className={classes.links}>Login as Demo User</p>
+              <Button className={classes.demoUserButton} onClick={handleDemoLogin}>
+                <p id='demoButton' className={classes.links}>Login as Demo User</p>
               </Button>
               <Button component={Link} to='/' className={classes.homeButton}>
                 <p id='homeButton' className={classes.links}>Home</p>
