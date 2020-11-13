@@ -217,12 +217,7 @@ function MyTeamPage() {
         <div id='bodyDiv'>
           <NavBar />
           <div className={classes.outsideContainer}>
-            <Container className={classes.infoContainer}>
-              {/* <Button onClick={handleGetPlayers}>Show My Teams</Button>
-              <Button onClick={handleGetLeague}>Get League</Button>
-              <Button onClick={handleJoinLeague}>Join League</Button>
-              <Button onClick={handleGetTeam}>Get Team</Button> */}
-              {/* <Button onClick={testing}>Test</Button> */}
+            <Container className={classes.infoContainer} maxWidth={false}>
               <Grid container item xs={12} className={classes.stuffContainer}>
                 <Container className={classes.leagueAndTeam}>
                   <Typography variant='h4' className={classes.leagueAndTeamInfo}>League: {leagueName}</Typography>
