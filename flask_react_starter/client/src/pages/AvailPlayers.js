@@ -298,7 +298,7 @@ function AvailPlayers() {
               </Grid>
             </Grid>
           </AppBar>
-          <Container className={classes.playerInfo}>
+          <Container className={classes.playerInfo} maxWidth={false}>
             <Grid container xs={12}>
               <Grid xs={2} className={classes.leftGrid}>
                 <div className={classes.myTeamContainer}>
