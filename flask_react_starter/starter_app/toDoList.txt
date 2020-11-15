@@ -9,4 +9,4 @@
   many players come back in the total query, and create the pages divs based on that
   total number divided by 50
 
-  Have to add a footer that will show up on ALL pages with my contact info.
+ **DONE** Have to add a footer that will show up on ALL pages with my contact info. 

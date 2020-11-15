@@ -124,14 +124,14 @@ function SplashPage() {
               <p className={classes.pText}>We give you all the stats you need to make informed decisions. With FFStockpile you'll never have to worry about a lack of information.</p>
             </Grid>
             <Grid item xs={6} className={classes.imageContainerTop}>
-              <img src={stats_picture} className={classes.upperImage}></img>
+              <img src={'https://raw.githubusercontent.com/MatthewTaylor9758/Fantasy-Football-Capstone/main/flask_react_starter/client/src/images/stats_picture.png'} className={classes.upperImage}></img>
             </Grid>
           </Grid>
         </Container>
         <Container className={classes.outerContainerLower}>
           <Grid container xs={10} spacing={2} className={classes.gridContainer}>
             <Grid item xs={6} className={classes.imageContainerBottom}>
-              <img src={data_image} className={classes.upperImage}></img>
+              <img src={'https://raw.githubusercontent.com/MatthewTaylor9758/Fantasy-Football-Capstone/main/flask_react_starter/client/src/images/data_image.jpg'} className={classes.upperImage}></img>
             </Grid>
             <Grid item xs={6} className={classes.gridText}>
             <Typography variant='h4' className={classes.pTitleText}>Your data all in one place</Typography>
