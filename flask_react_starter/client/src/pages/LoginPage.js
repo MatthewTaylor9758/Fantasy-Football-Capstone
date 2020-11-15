@@ -145,10 +145,10 @@ function LoginPage() {
       <div class='area'>
         <Card id='login-form' className={classes.outerContainer}>
           <ul class="footballs">
-              <div><img src={hiclipart_football}></img></div>
-              <div><img src={hiclipart_football}></img></div>
-              <div><img src={hiclipart_football}></img></div>
-              <div><img src={hiclipart_football}></img></div>
+              <div><img src={'https://raw.githubusercontent.com/MatthewTaylor9758/Fantasy-Football-Capstone/main/flask_react_starter/client/src/images/hiclipart_football.png'}></img></div>
+              <div><img src={'https://raw.githubusercontent.com/MatthewTaylor9758/Fantasy-Football-Capstone/main/flask_react_starter/client/src/images/hiclipart_football.png'}></img></div>
+              <div><img src={'https://raw.githubusercontent.com/MatthewTaylor9758/Fantasy-Football-Capstone/main/flask_react_starter/client/src/images/hiclipart_football.png'}></img></div>
+              <div><img src={'https://raw.githubusercontent.com/MatthewTaylor9758/Fantasy-Football-Capstone/main/flask_react_starter/client/src/images/hiclipart_football.png'}></img></div>
           </ul>
           <div>
             <form method='put' action='/api/users/' onSubmit={handleSubmit} className={classes.loginForm}>

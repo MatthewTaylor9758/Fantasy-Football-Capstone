@@ -127,10 +127,15 @@ function SignupPage() {
       }
     },
     homeButton: {
-      backgroundColor: 'rgba(255, 255, 255, 0)',
+      // backgroundColor: 'rgba(255, 255, 255, .6)',
       marginTop: '1em',
       borderRadius: '10px',
       padding: '0',
+      width: '100%',
+      '&:hover': {
+        backgroundColor: 'rgba(200, 200, 255, .8)',
+        color: 'white',
+      }
     },
     links: {
       textDecoration: 'none',
@@ -148,10 +153,10 @@ function SignupPage() {
       <div class='area'>
         <Card className={classes.outerContainer}>
             <ul class="footballs">
-              <div><img src={hiclipart_football}></img></div>
-              <div><img src={hiclipart_football}></img></div>
-              <div><img src={hiclipart_football}></img></div>
-              <div><img src={hiclipart_football}></img></div>
+              <div><img src={'https://raw.githubusercontent.com/MatthewTaylor9758/Fantasy-Football-Capstone/main/flask_react_starter/client/src/images/hiclipart_football.png'}></img></div>
+              <div><img src={'https://raw.githubusercontent.com/MatthewTaylor9758/Fantasy-Football-Capstone/main/flask_react_starter/client/src/images/hiclipart_football.png'}></img></div>
+              <div><img src={'https://raw.githubusercontent.com/MatthewTaylor9758/Fantasy-Football-Capstone/main/flask_react_starter/client/src/images/hiclipart_football.png'}></img></div>
+              <div><img src={'https://raw.githubusercontent.com/MatthewTaylor9758/Fantasy-Football-Capstone/main/flask_react_starter/client/src/images/hiclipart_football.png'}></img></div>
             </ul>
 
           <form action='/api/users/' method='post' onSubmit={handleSubmit} className={classes.signupForm}>
