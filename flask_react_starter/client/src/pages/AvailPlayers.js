@@ -194,7 +194,8 @@ function AvailPlayers() {
       textTransform: 'uppercase',
       '&:hover': {
         backgroundColor: 'rgba(0, 0, 200, .3)',
-        color: 'white'
+        color: 'white',
+        cursor: 'pointer',
       }
     },
     positionButton: {
@@ -209,7 +210,8 @@ function AvailPlayers() {
       textTransform: 'uppercase',
       '&:hover': {
         backgroundColor: 'rgba(0, 0, 0, .3)',
-        color: 'white'
+        color: 'white',
+        cursor: 'pointer',
       }
     },
     noLeagueDiv: {

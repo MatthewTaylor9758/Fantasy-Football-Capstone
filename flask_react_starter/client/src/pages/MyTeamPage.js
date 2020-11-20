@@ -201,7 +201,8 @@ function MyTeamPage() {
       textTransform: 'uppercase',
       '&:hover': {
         backgroundColor: 'rgba(200, 0, 0, .3)',
-        color: 'black'
+        color: 'black',
+        cursor: 'pointer',
       }
     },
     noPlayers: {
