@@ -162,7 +162,7 @@ function AvailPlayers() {
     myTeamPlayerName: {
       display: 'flex',
       maxWidth: '33.3%',
-      justifyContent: 'center',
+      marginRight: '1em',
       padding: '.3em 0'
     },
     myTeamPlayerPosition: {
