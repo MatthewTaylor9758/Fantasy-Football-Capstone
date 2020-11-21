@@ -1,11 +1,44 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
-import { makeStyles, Container, TextField, Button, Typography, Grid, AppBar, Modal } from '@material-ui/core';
+import { makeStyles, Container, Tab, Tabs, Typography, Grid, AppBar, Modal, Box } from '@material-ui/core';
 import Cookies from 'js-cookie';
 import NavBar from '../components/NavBar';
 import '../styles/titleBar.css';
 import { new_ffsplayer } from '../store/ffsplayers';
+import PropTypes from 'prop-types';
+
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role='tabpanel'
+      hidden={value !== index}
+      id={`scrollable-auto-tabpanel-${index}`}
+      aria-labelledby={`scrollable-auto-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box p={3}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+};
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired,
+};
+
+function allyProps(index) {
+  return {
+    id: `scrollable-auto-tab-${index}`,
+    'aria-controls': `scrollable-auto-tabpanel-${index}`
+  }
+};
 
 function AvailPlayers() {
   const dispatch = useDispatch()
@@ -18,6 +51,12 @@ function AvailPlayers() {
   const [specificPlayers, updateSpecificPlayers] = useState('');
   const [player, setPlayer] = useState('');
   const csrfToken = Cookies.get('XSRF-TOKEN');
+  const [value, setValue] = useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
   const handleShowAllPlayers = async (e) => {
     console.log(csrfToken);
     console.log(myLeagueId);
