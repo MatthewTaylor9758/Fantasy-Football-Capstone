@@ -54,6 +54,7 @@ function AvailPlayers() {
   const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
+    console.log(newValue);
     setValue(newValue);
   };
 
@@ -433,7 +434,26 @@ function AvailPlayers() {
                         <Typography variant='h4'>{player}</Typography>
                         <button className={classes.modalExitButton} onClick={handleClose}>X</button>
                       </div>
-                      This is just a test for the modal.
+                      <div>
+                        <AppBar position='static' color='default'>
+                          <Tabs
+                            value={value}
+                            onChange={handleChange}
+                            indicatorColor='primary'
+                            textColor='primary'
+                            aria-label='auto tabs'
+                          >
+                            <Tab label='Game Stats' {...allyProps(0)} />
+                            <Tab label='Combine Stats' {...allyProps(1)} />
+                          </Tabs>
+                        </AppBar>
+                        <TabPanel value={value} index={0}>
+                          This is where the game and year stats will go.
+                        </TabPanel>
+                        <TabPanel value={value} index={1}>
+                          This is where the combine stats will go.
+                        </TabPanel>
+                      </div>
                     </div>
                   </div>
                 </Modal>
