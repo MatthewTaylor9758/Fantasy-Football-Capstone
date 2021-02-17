@@ -36,60 +36,7 @@ In most instances, the front end will react to a change the user makes and send 
 </br>
 ### Material-UI
 Material-UI was chosen because mainly because of its built in functions and models. It has many models that can be used, but not only that, you can build on those models to create a custom look with the base that Material-UI gave you. It is very handy, and made my design much more efficient and elegant.
-```
-                <Grid item xs={3}>
-                  <Card onClick={handleOpen} className={classes.Createboard}>
-                    Create Board
-                    </Card>
-                  <Modal
-                    open={open}
-                    onClose={handleClose}
-                    aria-labelledby="simple-modal-title"
-                    aria-describedby="simple-modal-description"
-                  >
-                    <Grid style={modalStyle} className={classes.paper}>
-                      <Grid item xs={8}>
-                        <form className={classes.modalForm}>
-                          <div style={{ backgroundColor: dynamicColor }} className={classes.inputContainer}>
-                            <InputBase autoFocus className={classes.modalInput} classes={{ focused: classes.modalInputFocused }} placeholder="Add Board Title" name="title" value={title} onChange={handleBoard} />
-                          </div>
-                          <button className={classes.formButton} onClick={handleSubmit}>Create Board</button>
-                        </form>
-                      </Grid>
-                      <Grid container item xs={2} className={classes.templates}>
-                        <Grid item xs={4}>
-                          <Card className={classes.blue} onClick={() => setDynamicColor("rgb(0, 121, 191)")} />
-                        </Grid>
-                        <Grid item xs={4}>
-                          <Card className={classes.green} onClick={() => setDynamicColor("green")} />
-                        </Grid>
-                        <Grid item xs={4}>
-                          <Card className={classes.red} onClick={() => setDynamicColor("red")} />
-                        </Grid>
-                        <Grid item xs={4}>
-                          <Card className={classes.orange} onClick={() => setDynamicColor("orange")} />
-                        </Grid>
-                        <Grid item xs={4}>
-                          <Card className={classes.tan} onClick={() => setDynamicColor("tan")} />
-                        </Grid>
-                        <Grid item xs={4}>
-                          <Card className={classes.purple} onClick={() => setDynamicColor("purple")} />
-                        </Grid>
-                        <Grid item xs={4}>
-                          <Card className={classes.black} onClick={() => setDynamicColor("black")} />
-                        </Grid>
-                        <Grid item xs={4}>
-                          <Card className={classes.pink} onClick={() => setDynamicColor("pink")} />
-                        </Grid>
-                        <Grid item xs={4}>
-                          <Card className={classes.grey} onClick={() => setDynamicColor("grey")} />
-                        </Grid>
-                      </Grid>
-                    </Grid>
-                  </Modal>
-                </Grid>
-```
-The code above is an example of our integration of React, the ever-useful JSX, the "useState" React hook (setDynamicColor), and Material-UI. It uses classes and models from Material-UI that we built our own CSS into as well as the Grid system from Material-UI. The effect of using all of these together is when a user clicks "create board" a modal will pop up that a user can use to pick from 9 different colors, and see the changes happen dynamically.
+</br>
 </br>
 ## Back End Overview
 ### Flask
@@ -106,9 +53,78 @@ We chose the SQLAlchemy ORM for its ease of mapping, its far superior readabilit
 </br>
 ### Alembic
 We landed on Alembic naturally, being so close to SQLAlchemy, and we thrived using its almost instinctual method of creating migrations and interacting with SQLAlchemy to make the necessary changes to our database.
+</br>
+```
+class Team(db.Model):
+  __tablename__ = 'teams'
+  __table_args__ = (
+    UniqueConstraint('id', 'league_id', name = 'team_league_uidx'),
+  )
+
+  id = db.Column(db.Integer, nullable = False,  primary_key = True)
+  name = db.Column(db.String(100), nullable = False)
+  owner_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+  league_id = db.Column(db.Integer, db.ForeignKey('leagues.id'))
+
+  def to_dict(self):
+    return {
+      'id': self.id,
+      'name': self.name,
+      'owner_id': self.owner_id,
+      'league_id': self.league_id
+    }
+
+
+class Player(db.Model):
+  __tablename__ = 'players'
+
+  player_id = db.Column(db.Integer, nullable= False, primary_key = True, autoincrement = False)
+  full_name = db.Column(db.String(100), nullable = False)
+  first_name = db.Column(db.String(50), nullable = False)
+  last_name = db.Column(db.String(50), nullable = False)
+  nfl_team = db.Column(db.String(100), nullable = False)
+  position = db.Column(db.String(5), nullable = False)
+  height = db.Column(db.String(10))
+  weight = db.Column(db.String(10))
+  dob = db.Column(db.String(50))
+  college = db.Column(db.String(100))
+
+  def to_dict(self):
+    return {
+      'player_id': self.player_id,
+      'full_name': self.full_name,
+      'first_name': self.first_name,
+      'last_name': self.last_name,
+      'nfl_team': self.nfl_team,
+      'position': self.position,
+      'height': self.height,
+      'weight': self.weight,
+      'dob': self.dob,
+      'college': self.college
+    }
+
+class FFSplayer(db.Model):
+  __tablename__ = 'ffsplayers'
+  __table_args__ = (
+    UniqueConstraint('player_id', 'league_id', name='player_in_league_only_once_uidx'),
+  )
+  id = db.Column(db.Integer, nullable = False,  primary_key = True)
+  player_id = db.Column(db.Integer, db.ForeignKey('players.player_id'), nullable = False)
+  team_id = db.Column(db.Integer, db.ForeignKey('teams.id'), nullable = False)
+  league_id = db.Column(db.Integer, nullable = False)
+
+  def to_dict(self):
+    return {
+      'id': self.id,
+      'player_id': self.player_id,
+      'team_id': self.team_id,
+      'league_id': self.league_id
+    }
+```
+The code above contains some of the models I used in creating FFStockpile. This specific code takes advantage of the abilities of Flask and SQLAlchemy to easily interact with the PostgreSQL based database. In the Players model there is just the normal set up of a model that will be used for all of the players in the NFL, in the other two however, there are not just column constraints, but table constraints. One is essentially used to make sure that no player can be in a single league more than once, but can appear in different leagues. The other is used to make sure that the a team cannot appear in a league more than once, but can appear in different leagues. 
 
 ## Moving Forward
-The next thing to do would be to implement AWS to have users be able to add pictures to their profiles. I would also add in some more drag and drop functionality. I would also like to add in more colors to choose from in the "create board" modal.
+The first and biggest thing I would like to do next is to give more stats to each player, however those APIs cost hundreds and sometimes even thousands of dollars to gain access to. If I find a work around in the future though, that will be the first thing I do. Next would be to add some more stylistic flare to the site, and finally I would love the ability to host real simulated matchups and maybe real-time access to NFL box scores.
 
 ### Thank You
 
