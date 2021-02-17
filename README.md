@@ -40,19 +40,19 @@ Material-UI was chosen because mainly because of its built in functions and mode
 </br>
 ## Back End Overview
 ### Flask
-We decided to use the Flask framework for its intuitive approach to creating a server. Flask interacts with SQLAlchemy, PostgreSQL and Alembic seamlessly and helped streamline our interactions with the database in all facets.
+I decided to use the Flask framework for its intuitive approach to creating a server. Flask interacts with SQLAlchemy, PostgreSQL and Alembic seamlessly and helped streamline my interactions with the database in all facets.
 </br>
 </br>
 ### PostgreSQL
-We leveraged PostgreSQL's ability to use different transactions, foreign keys, subqueries, triggers, and different user-defined types and functions to create our site. Flask, SQLAlchemy and PostgreSQL work together to make our database construction, alterations, and interactions smoother.
+I leveraged PostgreSQL's ability to use different transactions, foreign keys, subqueries, triggers, and different user-defined types and functions to create my site. Flask, SQLAlchemy and PostgreSQL work together to make my database construction, alterations, and interactions smoother.
 </br>
 </br>
 ### SQLAlchemy
-We chose the SQLAlchemy ORM for its ease of mapping, its far superior readability when compared to other ORMs, and the intuitive nature with which you can create models. When combined with our other back end technologies, it makes for a fantastic experience. Oh, and SQLAlchemy has amazing documentation so that always helps!
+I chose the SQLAlchemy ORM for its ease of mapping, its far superior readability when compared to other ORMs, and the intuitive nature with which you can create models. When combined with my other back end technologies, it makes for a fantastic experience. Oh, and SQLAlchemy has amazing documentation so that always helps!
 </br>
 </br>
 ### Alembic
-We landed on Alembic naturally, being so close to SQLAlchemy, and we thrived using its almost instinctual method of creating migrations and interacting with SQLAlchemy to make the necessary changes to our database.
+I landed on Alembic naturally, being so close to SQLAlchemy, and I thrived using its almost instinctual method of creating migrations and interacting with SQLAlchemy to make the necessary changes to my database.
 </br>
 ```
 class Team(db.Model):
@@ -128,7 +128,7 @@ The first and biggest thing I would like to do next is to give more stats to eac
 
 ### Thank You
 
-I sincerely apprectiate the time you have taken out of your day to read this far and parse through the site we had a ton of fun making! Our team was fantastic and I cannot wait to work with them again in the future!
+I sincerely apprectiate the time you have taken out of your day to read this far and parse through the site I had a ton of fun making! Creating this site from the ground up was a very rewarding experience and I cannot wait to work on it in the future!
 
 ### Credits:
 
