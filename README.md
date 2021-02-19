@@ -20,7 +20,7 @@ Users can see their own team, the league they are in, the available players to p
 </br>
 </br>
 ## Application Architecture
-Placeholder for diagram that will show technologies and how they interact with each other.
+![FFStockpile Architecture](https://raw.githubusercontent.com/MatthewTaylor9758/Fantasy-Football-Capstone/main/flask_react_starter/client/src/images/FFStockpile%20Architecture.png)
 </br>
 </br>
 ## Front End Overview
@@ -134,5 +134,5 @@ I sincerely apprectiate the time you have taken out of your day to read this far
 
 <ul>
   <li>Gifs: Giphy.com</li>
-  <li>Architecture Diagram is courtesy of</li> 
+  <li>Architecture Diagram is courtesy of https://app.diagrams.net/</li> 
 </ul>
