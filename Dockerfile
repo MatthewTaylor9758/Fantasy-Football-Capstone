@@ -4,13 +4,13 @@ WORKDIR /var/www
 COPY . .
 
 # Install Python Dependencies
-RUN ["pip", "install", "-r", "requirements.txt"]
+RUN ["pip", "install", "-r", "flask_react_starter/starter_app/requirements.txt"]
 
 # Move our react build for Flask to serve
 # Use cp here because we're copying files inside our working directory, not from
 # our host machine.
-RUN ["cp", "-r", "app/static/static/js", "app/static"]
-RUN ["cp", "-r", "app/static/static/css", "app/static"]
+RUN ["cp", "-r", "flask_react_starter/starter_app/app/static/static/js", "flask_react_starter/starter_app/app/static"]
+RUN ["cp", "-r", "flask_react_starter/starter_app/app/static/static/css", "flask_react_starter/starter_app/app/static"]
 
 # Setup Flask environment
 ENV FLASK_APP=app
